@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservationType;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -26,21 +25,13 @@ class Controller extends BaseController
             ]
         ];
 
-        $reservationTypes = ReservationType::where('type', 'reservation')->get();
-        foreach ($reservationTypes as $reservationType) {
-            $menuItems[] = [
-                'title' => $reservationType->title,
-                'route' => route('reserve.index', [$reservationType->slug])
-            ];
-        }
-
         if (Auth::guest()) {
             $menuItems[] =
                 [
                     'title' => 'Inloggen',
                     'route' => route('login'),
                     'icon' => 'user',
-                    'class' => 'ml-auto'
+                    'class' => 'md:ml-auto'
                 ];
         } else {
             $menuItems[] =
@@ -48,7 +39,7 @@ class Controller extends BaseController
                     'title' => 'Account',
                     'route' => route('account'),
                     'icon' => 'users',
-                    'class' => 'ml-auto'
+                    'class' => 'md:ml-auto'
                 ];
 
             $menuItems[] =
@@ -82,8 +73,13 @@ class Controller extends BaseController
             ], [
                 'title' => 'Reserveringstypes',
                 'icon' => 'book',
-                'route' => route('dashboard.reservationTypes.index'),
-                'routeName' => 'dashboard.reservationTypes.index'
+                'route' => route('dashboard.reservation-types.index'),
+                'routeName' => 'dashboard.reservation-types.index'
+            ], [
+                'title' => 'FAQ\'s',
+                'icon' => 'help-circle',
+                'route' => route('dashboard.frequently-asked-questions.index'),
+                'routeName' => 'dashboard.frequently-asked-questions.index'
             ]
         ];
     }

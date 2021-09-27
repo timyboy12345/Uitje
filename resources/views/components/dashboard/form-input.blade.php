@@ -2,13 +2,36 @@
     <label for="{{ $id }}">{{ $label }}</label>
 
     @if (in_array($type, ['text', 'number', 'date']))
-    <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}"
-           class="transition duration-100 rounded py-1 px-2 focus:ring-indigo-800 border-gray-200" value="{{ $value }}">
+        <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}"
+               class="transition duration-100 rounded py-1 px-2 focus:ring-indigo-800 border-gray-200"
+               value="{{ $value }}">
+    @elseif($type === 'textarea')
+        <textarea class="transition duration-100 rounded py-1 px-2 focus:ring-indigo-800 border-gray-200"
+                  name="{{ $id }}" id="{{ $id }}">{{ $value }}</textarea>
+    @elseif($type === 'boolean')
+        <div class="flex flex-row items-center">
+            <input id="{{ $id }}" name="{{ $id }}" type="checkbox" value="1"
+                   class="mr-2 rounded transition duration-100" {{ $value == true ? 'checked' : '' }}>
+            <div class="text-gray-600">{{ $description }}</div>
+        </div>
+    @elseif($type === 'select')
+        <select id="{{ $id }}" name="{{ $id }}"
+                class="mr-2 rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">
+            <option value="">- GEEN WAARDE -</option>
+
+            @foreach ($options as $option)
+                <option value="{{ $option['value'] }}" {{ $value === $option['value'] ? 'selected' : '' }}>{{ $option['title'] }}</option>
+            @endforeach
+        </select>
     @else
         <p class="py-2 px-4 text-red-800 bg-red-100 rounded">Input type not found</p>
     @endif
 
-    @isset($description)
+    @if(isset($description) && $type !== 'boolean')
         <p class="text-gray-600 text-sm mt-0.5">{{ $description }}</p>
-    @endisset
+    @endif
+
+    @error($id)
+    <div class="text-sm text-red-600">{{ $message }}</div>
+    @enderror
 </div>

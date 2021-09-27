@@ -28,11 +28,16 @@ class ReservationType extends Model
         'extra'
     ];
 
-    protected $fillable = ['title', 'description', 'type', 'slug'];
+    protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists'];
 
     public function orders()
     {
         return $this->hasManyThrough(Order::class, OrderLine::class);
+    }
+
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class);
     }
 
     public function reservationTypeLines()
@@ -45,11 +50,13 @@ class ReservationType extends Model
         'has_accompanists' => 'boolean'
     ];
 
-    public function parent() {
+    public function parent()
+    {
         return $this->belongsTo(ReservationType::class);
     }
 
-    public function children() {
+    public function children()
+    {
         return $this->hasMany(ReservationType::class);
     }
 }

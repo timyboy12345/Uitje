@@ -39,7 +39,7 @@
         </div>
     </nav>
 
-    <div class="sm:w-2/3 md:w-3/4 xl:w-4/5 ml-auto">
+    <div class="w-full sm:w-2/3 md:w-3/4 xl:w-4/5 sm:ml-auto">
         <div class="flex flex-row justify-between items-center w-full p-4">
             <div class="flex flex-col">
                 <h2 class="text-indigo-800 text-lg font-bold">
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="mx-4 mt-4 mb-4">
+        <div class="mx-4 mb-4">
             @hasSection('backDestination')
                 <div class="mb-2">
                     <a href="@yield('backDestination')" class="text-gray-600 text-sm">< Terug</a>

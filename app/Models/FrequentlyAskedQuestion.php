@@ -12,4 +12,19 @@ class FrequentlyAskedQuestion extends Model
     public $incrementing = false;
 
     protected $fillable = ['title', 'content', 'subject'];
+
+    public function relatedQuestions()
+    {
+        return FrequentlyAskedQuestion::where('subject', $this->subject)
+            ->where('id', '!=', $this->id)
+            ->get();
+    }
+
+    public function getParsedSubjectAttribute() {
+        if (ReservationType::where('id', '=', $this->subject)->exists()) {
+            return ReservationType::find($this->subject)->title;
+        }
+
+        return $this->subject;
+    }
 }

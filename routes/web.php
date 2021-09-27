@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Dashboard\CustomersController;
+use App\Http\Controllers\Dashboard\FrequentlyAskedQuestionController;
 use App\Http\Controllers\Dashboard\OrderLinesController;
 use App\Http\Controllers\Dashboard\ReservationTypesController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::resource('customers', CustomersController::class);
     Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
-    Route::resource('reservationTypes', ReservationTypesController::class);
+    Route::resource('reservation-types', ReservationTypesController::class);
     Route::resource('orderLines', OrderLinesController::class);
+    Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
 });

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\FrequentlyAskedQuestion;
+use App\Models\ReservationType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,11 +25,13 @@ class FrequentlyAskedQuestionFactory extends Factory
      */
     public function definition()
     {
+        $subject = $this->faker->randomElement(ReservationType::all());
+
         return [
             'id' => $this->faker->uuid,
             'title' => $this->faker->text(30),
             'content' => $this->faker->text(500),
-            'subject' => $this->faker->randomElement(['general', 'kinderfeestjes', 'schoolreisjes'])
+            'subject' => isset($subject) ? $subject->id : null
         ];
     }
 }

@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(5)->create();
-        FrequentlyAskedQuestion::factory(15)->create();
         ReservationType::factory(6)
             ->has(ReservationTypeLine::factory()->count(4))
             ->create();
@@ -36,5 +35,7 @@ class DatabaseSeeder extends Seeder
                     'user_id' => $user->id,
                 ]);
         });
+
+        FrequentlyAskedQuestion::factory(15)->create();
     }
 }
