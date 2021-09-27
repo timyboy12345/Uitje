@@ -6,7 +6,7 @@
         <p class="text-gray-600 text-sm">Kies hieronder het type reisje wat u wil reserveren.</p>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-            @foreach (\App\Models\ReservationType::all() as $reservationType)
+            @foreach ($reservationTypes as $reservationType)
                 <a href="{{ route('reserve.index', [$reservationType->slug]) }}"
                    class="bg-secondary hover:bg-secondary-600 transition duration-100 text-white rounded shadow overflow-hidden">
                     <img

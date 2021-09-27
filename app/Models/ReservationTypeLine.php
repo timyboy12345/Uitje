@@ -21,4 +21,8 @@ class ReservationTypeLine extends Model
     public function reservationType() {
         return $this->belongsTo(ReservationType::class);
     }
+
+    protected $casts = [
+        'is_required' => 'boolean'
+    ];
 }

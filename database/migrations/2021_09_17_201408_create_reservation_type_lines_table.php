@@ -20,8 +20,10 @@ class CreateReservationTypeLinesTable extends Migration
             $table->string('description')->nullable();
             $table->string('placeholder')->nullable();
             $table->string('type')->default('text');
-            $table->boolean('isRequired')->default(true);
+            $table->boolean('is_required')->default(true);
             $table->timestamps();
+
+            $table->foreign('reservation_type_id')->references('id')->on('reservation_types');
         });
     }
 

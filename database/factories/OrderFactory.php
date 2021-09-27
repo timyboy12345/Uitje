@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class OrderFactory extends Factory
 {
@@ -22,7 +23,8 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id' => $this->faker->uuid,
+            'confirmation_code' => Str::random(10)
         ];
     }
 }

@@ -17,7 +17,13 @@ class CreateOrderLinesTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('order_id');
             $table->uuid('reservation_type_id');
+            $table->dateTime('date')->nullable();
+            $table->integer('participants')->nullable();
+            $table->integer('accompanists')->nullable();
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('reservation_type_id')->references('id')->on('reservation_types');
         });
     }
 

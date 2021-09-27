@@ -27,7 +27,10 @@ class ReservationTypeFactory extends Factory
             'title' => $title,
             'description' => $this->faker->text(200),
             'slug' => strtolower(preg_replace('/[^0-9a-zA-Z]/', '', $title)),
-            'type' => $this->faker->randomElement(ReservationType::$reservationTypesEnum)
+            'type' => $this->faker->randomElement(ReservationType::$reservationTypesEnum),
+            'date_type' => $this->faker->randomElement([null, 'date', 'datetime']),
+            'has_participants' => $this->faker->boolean,
+            'has_accompanists' => $this->faker->boolean
         ];
     }
 }

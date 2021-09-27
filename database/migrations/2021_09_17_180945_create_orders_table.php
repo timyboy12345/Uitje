@@ -18,6 +18,8 @@ class CreateOrdersTable extends Migration
             $table->uuid('user_id')->nullable();
             $table->string('confirmation_code', 10);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

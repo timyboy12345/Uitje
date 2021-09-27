@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * @property string id
+ * @property string name
+ * @property string email
+ * @property string email_verified_at
+ * @property string password
+ * @property string remember_token
+ * @property string created_at
+ * @property string updated_at
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,5 +57,14 @@ class User extends Authenticatable
 
     public function orders() {
         return $this->hasMany(Order::class);
+    }
+
+
+    /**
+     * Return the hashed email for Gravatar (https://nl.gravatar.com/site/implement/hash/)
+     * @return string
+     */
+    public function getHashedEmailAttribute(): string {
+        return md5($this->email);
     }
 }

@@ -22,7 +22,10 @@ class OrderLineFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id' => $this->faker->uuid,
+            'date' => $this->faker->dateTimeThisYear,
+            'participants' => $this->faker->numberBetween(4, 130),
+            'accompanists' => $this->faker->numberBetween(1, 25)
         ];
     }
 }

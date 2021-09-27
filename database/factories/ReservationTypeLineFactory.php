@@ -26,7 +26,8 @@ class ReservationTypeLineFactory extends Factory
             'label' => $this->faker->text(20),
             'placeholder' => $this->faker->text(40),
             'description' => $this->faker->text(60),
-            'type' => $this->faker->randomElement(ReservationTypeLine::$reservationTypeLineEnum)
+            'type' => $this->faker->randomElement(ReservationTypeLine::$reservationTypeLineEnum),
+            'is_required' => $this->faker->boolean
         ];
     }
 }
