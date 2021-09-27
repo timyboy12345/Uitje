@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
+use App\Models\FrequentlyAskedQuestion;
+use App\Models\ReservationType;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+class FrequentlyAskedQuestionController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $faqs = FrequentlyAskedQuestion::paginate();
+
+        return response()->view('dashboard.frequently-asked-questions.index', compact(['faqs']));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param string $id
+     * @return Response
+     */
+    public function show(string $id): Response
+    {
+        $faq = FrequentlyAskedQuestion::findOrFail($id);
+
+        return response()->view('dashboard.frequently-asked-questions.show', compact(['faq']));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $faq = FrequentlyAskedQuestion::findOrFail($id);
+        $selectOptions = ReservationType::all()->map(function ($question) {
+            return [
+                'value' => $question->id,
+                'title' => $question->title
+            ];
+        });
+
+        return response()->view('dashboard.frequently-asked-questions.edit', compact(['faq', 'selectOptions']));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param string $id
+     * @return RedirectResponse
+     */
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        $faq = FrequentlyAskedQuestion::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'subject' => 'nullable|string'
+        ]);
+
+        $faq->update($request->only($faq->getFillable()));
+
+        return response()->redirectToRoute('dashboard.frequently-asked-questions.show', [$faq->id]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
