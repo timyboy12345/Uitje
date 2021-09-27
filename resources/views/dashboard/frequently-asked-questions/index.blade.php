@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Veelgestelde Vragen')
-@section('subtitle', 'Beheer hier alle veelgesteelde vragen')
+@section('subtitle', 'Beheer hier alle veelgestelde vragen')
 @section('enableSearch', true)
+@section('createDestination', route('dashboard.frequently-asked-questions.create'))
 
 @section('content')
     <div class="lg:col-span-2">

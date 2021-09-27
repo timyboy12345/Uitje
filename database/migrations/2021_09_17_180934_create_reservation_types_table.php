@@ -23,6 +23,8 @@ class CreateReservationTypesTable extends Migration
             $table->boolean('has_participants')->default(false);
             $table->boolean('has_accompanists')->default(false);
             $table->timestamps();
+
+            $table->softDeletes();
         });
 
         Schema::create('reservation_type_reservation_type', function(Blueprint $table) {

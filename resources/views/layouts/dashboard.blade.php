@@ -6,9 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Uitje Dashboard</title>
+    @hasSection('title')
+        <title>@yield('title') / Uitje Dashboard</title>
+    @else
+        <title>Uitje Dashboard</title>
+    @endif
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +23,9 @@
     <nav class="w-full sm:fixed sm:h-screen sm:w-1/3 md:w-1/4 xl:w-1/5 bg-indigo-700 text-white p-4 shadow">
         <div class="lg:max-w-5xl lg:mx-auto">
             <div class="flex flex-col">
-                <div class="font-bold text-white text-xl">
+                <a href="{{ route('home') }}" class="font-bold text-white text-xl">
                     Uitje
-                </div>
+                </a>
 
                 <div class="mt-8 flex flex-col">
                     @foreach (\App\Http\Controllers\Controller::getDashboardMenuItems() as $menuItem)
@@ -52,19 +56,38 @@
                 @endif
             </div>
 
-            <div class="flex flex-row">
+            <div class="flex flex-row items-center gap-x-2">
+                @hasSection('enableSearch')
+                    <input type="text"
+                           class="py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
+                           placeholder="Zoeken">
+                @endif
+
+                @hasSection('createDestination')
+                    <a title="Toevoegen"
+                       class="flex items-center content-center bg-indigo-700 hover:bg-indigo-800 transition duration-100 text-white rounded-full py-1 px-2 text-sm"
+                       href="@yield('createDestination')">
+                        <i data-feather="plus" class="w-4"></i>
+                    </a>
+                @endif
+
+                @hasSection('destroyDestination')
+                    <form method="post" action="@yield('destroyDestination')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" title="Verwijderen"
+                           class="flex items-center content-center bg-red-600 hover:bg-red-700 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
+                            <i data-feather="trash" class="w-4"></i>
+                        </button>
+                    </form>
+                @endif
+
                 @hasSection('editDestination')
                     <a title="Aanpassen"
                        class="flex items-center content-center bg-indigo-700 hover:bg-indigo-800 transition duration-100 text-white rounded-full py-1 px-2 text-sm"
                        href="@yield('editDestination')">
                         <i data-feather="edit" class="w-4"></i>
                     </a>
-                @endif
-
-                @hasSection('enableSearch')
-                    <input type="text"
-                           class="py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
-                           placeholder="Zoeken">
                 @endif
             </div>
         </div>
@@ -84,5 +107,5 @@
 </div>
 </body>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 </html>

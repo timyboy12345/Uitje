@@ -2,6 +2,7 @@
 @section('title', 'Veelgestelde Vraag')
 @section('subtitle', $faq->title)
 @section('editDestination', route('dashboard.frequently-asked-questions.edit', $faq->id))
+@section('destroyDestination', route('dashboard.frequently-asked-questions.destroy', $faq->id))
 
 @section('content')
     <x-dashboard.card

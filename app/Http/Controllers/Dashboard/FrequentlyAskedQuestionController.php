@@ -8,6 +8,7 @@ use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class FrequentlyAskedQuestionController extends Controller
 {
@@ -30,18 +31,32 @@ class FrequentlyAskedQuestionController extends Controller
      */
     public function create()
     {
-        //
+        $selectOptions = $this->getSelectOptions();
+        return response()->view('dashboard.frequently-asked-questions.create', compact('selectOptions'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'subject' => 'nullable|string'
+        ]);
+
+        $faq = new FrequentlyAskedQuestion();
+        $faq->id = Str::uuid()->toString();
+        $faq->fill($request->only($faq->getFillable()));
+        $faq->subject = $request->filled('subject') ? $request->get('subject') : 'general';
+
+        $faq->save();
+
+        return response()->redirectToRoute('dashboard.frequently-asked-questions.show', $faq->id);
     }
 
     /**
@@ -66,12 +81,7 @@ class FrequentlyAskedQuestionController extends Controller
     public function edit($id)
     {
         $faq = FrequentlyAskedQuestion::findOrFail($id);
-        $selectOptions = ReservationType::all()->map(function ($question) {
-            return [
-                'value' => $question->id,
-                'title' => $question->title
-            ];
-        });
+        $selectOptions = $this->getSelectOptions();
 
         return response()->view('dashboard.frequently-asked-questions.edit', compact(['faq', 'selectOptions']));
     }
@@ -101,11 +111,30 @@ class FrequentlyAskedQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Response
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $faq = FrequentlyAskedQuestion::findOrFail($id);
+        $faq->delete();
+        return response()->redirectToRoute('dashboard.frequently-asked-questions.index');
+    }
+
+    public function getSelectOptions()
+    {
+        $subjects = ReservationType::all()->map(function ($question) {
+            return [
+                'value' => $question->id,
+                'title' => $question->title
+            ];
+        });
+
+        $subjects[] = [
+            'value' => 'general',
+            'title' => 'Generiek'
+        ];
+
+        return $subjects;
     }
 }

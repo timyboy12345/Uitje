@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('confirmation_code', 10);
             $table->timestamps();
 
+            $table->softDeletes();
+
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

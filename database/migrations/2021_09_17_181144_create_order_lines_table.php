@@ -22,6 +22,8 @@ class CreateOrderLinesTable extends Migration
             $table->integer('accompanists')->nullable();
             $table->timestamps();
 
+            $table->softDeletes();
+
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('reservation_type_id')->references('id')->on('reservation_types');
         });

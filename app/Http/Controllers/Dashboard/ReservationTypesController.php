@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservationType;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -73,7 +74,7 @@ class ReservationTypesController extends Controller
      *
      * @param Request $request
      * @param string $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, string $id)
     {
@@ -98,11 +99,13 @@ class ReservationTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Response
+     * @param string $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $reservationType = ReservationType::findOrFail($id);
+        $reservationType->delete();
+        return response()->redirectToRoute('dashboard.reservation-types.index');
     }
 }

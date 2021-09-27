@@ -2,6 +2,7 @@
 @section('title', 'Reserveringstype')
 @section('subtitle', $reservationType->title)
 @section('editDestination', route('dashboard.reservation-types.edit', $reservationType->id))
+@section('destroyDestination', route('dashboard.reservation-types.destroy', $reservationType->id))
 
 @section('content')
     <x-dashboard.card

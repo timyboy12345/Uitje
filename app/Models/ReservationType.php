@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ReservationType
@@ -21,7 +22,7 @@ class ReservationType extends Model
 {
     public $incrementing = false;
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public static $reservationTypesEnum = [
         'reservation',

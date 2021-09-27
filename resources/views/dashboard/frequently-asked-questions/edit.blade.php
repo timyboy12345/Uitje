@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'Reserveringstype aanpassen')
+@section('title', 'Veelgestelde Vraag aanpassen')
 @section('subtitle', $faq->title)
 @section('backDestination', route('dashboard.reservation-types.show', $faq->id))
 
@@ -11,7 +11,7 @@
             @method('PUT')
             @csrf
 
-            <x-dashboard.form-input type="text" id="title" label="Titel" :value="$faq->title" />
+            <x-dashboard.form-input type="text" id="title" label="Titel" :value="old('title', $faq->title)" />
             <x-dashboard.form-input type="textarea" id="content" label="Omschrijving" :value="old('content', $faq->content)" />
             <x-dashboard.form-input type="select" id="subject" label="Onderwerp" :value="old('subject', $faq->subject)" :options="$selectOptions"></x-dashboard.form-input>
 

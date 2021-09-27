@@ -17,7 +17,7 @@ class CreateFrequentlyAskedQuestionsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('content');
-            $table->string('subject');
+            $table->string('subject')->default('general');
             $table->timestamps();
         });
     }

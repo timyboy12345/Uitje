@@ -5,6 +5,7 @@ namespace App\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class OrderLine
@@ -20,7 +21,7 @@ class OrderLine extends Model
 {
     public $incrementing = false;
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['date', 'participants', 'accompanists'];
 
