@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property OrderLine[] orderLines
+ * @property string id The UUID of this order
+ * @property string user_id The UUID of the user attached to this order
+ * @property string confirmation_code The confirmation code of this order
  * @property User user
  */
 class Order extends Model
@@ -32,7 +35,7 @@ class Order extends Model
      */
     public function getNameAttribute(): string
     {
-        $upperOrderLine = $this->orderLines()->whereHas('reservationType', function($query) {
+        $upperOrderLine = $this->orderLines()->whereHas('reservationType', function ($query) {
             $query->where('type', 'reservation');
         })->first();
 
@@ -40,17 +43,29 @@ class Order extends Model
             return $upperOrderLine->reservationType->title;
         }
 
-        return $this->getDateAttribute() ?? $this->user->name;
+        $date = $this->getDateAttribute();
+        if (isset($date)) {
+            return $date;
+        }
+
+        return isset($this->user) ? $this->user->name : $this->id;
     }
 
-    public function getDateAttribute()
+    /**
+     * @return string|null
+     */
+    public function getDateAttribute(): ?string
     {
-        $this->orderLines()->each(function($line) {
-            if (isset($line->date)) {
-                return $line->date;
-            }
-        });
+        /** @var OrderLine $upperOrderLine */
+        $upperOrderLine = $this->orderLines()->whereHas('reservationType', function ($query) {
+            $query->where('type', 'reservation')
+                ->whereNotNull('date');
+        })->first();
 
-        return 'geen datum';
+        if (isset($upperOrderLine)) {
+            return $upperOrderLine->date;
+        }
+
+        return null;
     }
 }

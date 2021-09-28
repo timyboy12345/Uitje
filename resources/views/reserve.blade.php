@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Reservering Plaatsen')
 
 @section('content')
     <a href="{{ route('home') }}" class="block text-gray-400 text-sm mb-4">< Terug naar de homepagina</a>

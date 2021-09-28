@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\OrderLine;
+use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class OrderLinesController extends Controller
 {
@@ -27,18 +30,44 @@ class OrderLinesController extends Controller
      */
     public function create()
     {
-        //
+        $reservationTypes = ReservationType::all()->map(function($type) {
+            return [
+                'value' => $type->id,
+                'title' => "{$type->title} / {$type->type}"
+            ];
+        });
+
+        $orders = Order::all()->map(function($order) {
+            return [
+                'value' => $order->id,
+                'title' => $order->id
+            ];
+        });
+
+        return response()->view('dashboard.orderlines.create', compact(['reservationTypes', 'orders']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'order_id' => 'required|string|exists:orders,id',
+            'reservation_type_id' => 'required|string|exists:reservation_types,id'
+        ]);
+
+        $orderLine = new OrderLine();
+        $orderLine->id = Str::uuid()->toString();
+        $orderLine->order_id = $request->get('order_id');
+        $orderLine->reservation_type_id = $request->get('reservation_type_id');
+        $orderLine->fill($request->only($orderLine->getFillable()));
+        $orderLine->save();
+
+        return response()->redirectToRoute('dashboard.orderLines.show', $orderLine->id);
     }
 
     /**

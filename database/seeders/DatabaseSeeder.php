@@ -31,16 +31,29 @@ class DatabaseSeeder extends Seeder
             ->has(ReservationTypeLine::factory()->count(4))
             ->create();
 
-        $reservationType = ReservationType::where('type', 'reservation')->first();
-
-        User::all()->each(function ($user) use ($reservationType) {
-            Order::factory(2)
-                ->has(OrderLine::factory([
-                    'reservation_type_id' => $reservationType->id
-                ])->count(1))
+        User::all()->each(function ($user) {
+            Order::factory(rand(0, 3))
                 ->create([
                     'user_id' => $user->id,
-                ]);
+                ])
+                ->each(function ($order) {
+                    $reservationType = ReservationType::where('type', 'reservation')->get()->random();
+                    $rand = rand(1, 4);
+
+                    OrderLine::factory(1)->create([
+                        'reservation_type_id' => $reservationType->id,
+                        'order_id' => $order->id
+                    ]);
+
+                    if ($rand > 1) {
+                        $extraReservationType = ReservationType::where('type', 'extra')->get()->random();
+
+                        OrderLine::factory($rand - 1)->create([
+                            'reservation_type_id' => $extraReservationType->id,
+                            'order_id' => $order->id
+                        ]);
+                    }
+                });
         });
 
         FrequentlyAskedQuestion::factory(15)->create();

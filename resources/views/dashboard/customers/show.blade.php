@@ -12,6 +12,6 @@
     </div>
 
     <div class="lg:col-span-2">
-        <x-dashboard.table :items="$customer->orders" type="orders"/>
+        <x-dashboard.table title="Reserveringen van deze gebruiker" :items="$customer->orders" type="orders"></x-dashboard.table>
     </div>
 @endsection

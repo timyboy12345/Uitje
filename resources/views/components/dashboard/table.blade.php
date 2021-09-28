@@ -18,11 +18,15 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Aangemaakt Op
+                        Lid Sinds
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Rol
+                    </th>
+                    <th scope="col"
+                        class="whitespace-nowrap px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        # Bestellingen
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                         <span class="sr-only">Bekijken</span>
@@ -36,10 +40,6 @@
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Naam
-                    </th>
-                    <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Aangemaakt Op
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -65,6 +65,10 @@
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Datum
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Type
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -154,10 +158,10 @@
                             {{ $item->created_at }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span
-                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Gebruiker
-                        </span>
+                            <x-dashboard.pill>{{ $item->role }}</x-dashboard.pill>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <x-dashboard.pill>{{ $item->orders->count() }}</x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.customers.show', $item->id) }}"
@@ -177,15 +181,12 @@
                             {{ $item->name }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->created_at }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->date }}
+                            {{ $item->date ?? '-' }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            {{ trans_choice(':count item|:count items', $item->orderLines->count(), [$item->orderLines->count()]) }}
+                            {{ trans_choice(':count onderdeel|:count onderdelen', $item->orderLines->count(), [$item->orderLines->count()]) }}
                         </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -207,20 +208,25 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
                             {{ $item->date }}
                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-normal">
+                            <x-dashboard.pill>{{ $item->reservationType->type }}</x-dashboard.pill>
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             @if ($item->reservationType->has_participants)
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    {{ $item->participants ?? "-" }}
-                                </span>
+                                <x-dashboard.pill textcolor="text-green-800" bgcolor="bg-green-100">
+                                    {{ $item->participants ?? 'x' }}
+                                </x-dashboard.pill>
+                            @else
+                                <x-dashboard.pill textcolor="text-gray-600" bgcolor="bg-gray-100">-</x-dashboard.pill>
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             @if ($item->reservationType->has_accompanists)
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                    {{ $item->accompanists ?? "-" }}
-                                </span>
+                                <x-dashboard.pill textcolor="text-green-800" bgcolor="bg-green-100">
+                                    {{ $item->accompanists }}
+                                </x-dashboard.pill>
+                            @else
+                                <x-dashboard.pill textcolor="text-gray-600" bgcolor="bg-gray-100">-</x-dashboard.pill>
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -240,7 +246,7 @@
                             {{ $item->title }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->type }}
+                            <x-dashboard.pill>{{ $item->type }}</x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span

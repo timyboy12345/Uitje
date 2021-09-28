@@ -1,9 +1,10 @@
 @extends('layouts.default')
+@section('title', 'Home')
 
 @section('content')
     <div class="p-4 rounded-sm shadow-sm bg-white">
         <h1 class="font-bold text-secondary text-lg">Uitje Reserveren</h1>
-        <p class="text-gray-600 text-sm">Kies hieronder het type reisje wat u wil reserveren.</p>
+        <p class="text-gray-600 text-sm">Kies hieronder het type uitje waarvoor u een reservering wilt plaatsen.</p>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
             @foreach ($reservationTypes as $reservationType)

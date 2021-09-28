@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Reservering Bekijken')
 
 @section('content')
     <div class="grid gap-4 lg:grid-cols-2">
@@ -16,7 +17,7 @@
             <h1 class="text-secondary font-bold text-lg">Onderdelen</h1>
             <h2 class="text-sm text-gray-600 mb-2">Dit zijn alle onderdelen van deze reservering</h2>
 
-            <x-list-group :items="$order->orderLines" type="orderLines" />
+            <x-list-group :items="$order->orderLines" type="orderLines"></x-list-group>
         </div>
     </div>
 @endsection

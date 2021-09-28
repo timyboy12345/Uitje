@@ -17,10 +17,13 @@
     @elseif($type === 'select')
         <select id="{{ $id }}" name="{{ $id }}"
                 class="mr-2 rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">
-            <option value="">- GEEN WAARDE -</option>
+            @if (($nullable ?? true) === true)
+                <option value="">- Geen Waarde</option>
+            @endif
 
             @foreach ($options as $option)
-                <option value="{{ $option['value'] }}" {{ $value === $option['value'] ? 'selected' : '' }}>{{ $option['title'] }}</option>
+                <option
+                    value="{{ $option['value'] }}" {{ $value === $option['value'] ? 'selected' : '' }}>{{ $option['title'] }}</option>
             @endforeach
         </select>
     @else

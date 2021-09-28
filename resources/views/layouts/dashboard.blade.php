@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @hasSection('title')
-        <title>@yield('title') / Uitje Dashboard</title>
+        <title>@yield('title') / {{ config('app.name') }} Dashboard</title>
     @else
-        <title>Uitje Dashboard</title>
+        <title>{{ config('app.name') }} Dashboard</title>
     @endif
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -76,7 +76,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" title="Verwijderen"
-                           class="flex items-center content-center bg-red-600 hover:bg-red-700 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
+                                class="flex items-center content-center bg-red-600 hover:bg-red-700 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
                             <i data-feather="trash" class="w-4"></i>
                         </button>
                     </form>
@@ -95,7 +95,7 @@
         <div class="mx-4 mb-4">
             @hasSection('backDestination')
                 <div class="mb-2">
-                    <a href="@yield('backDestination')" class="text-gray-600 text-sm">< Terug</a>
+                    <a href="@yield('backDestination')" class="text-gray-600 text-sm">< @yield('backLabel', 'Terug')</a>
                 </div>
             @endif
 

@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Jouw Account')
 
 @section('content')
     <div class="grid gap-4">
@@ -15,7 +16,7 @@
             <h1 class="text-secondary font-bold text-lg">Jouw Bestellingen</h1>
             <h2 class="text-sm text-gray-600 mb-2">Dit zijn de recentste bestellingen in jouw account.</h2>
 
-            <x-list-group :items="$orders" type="orders" />
+            <x-list-group :items="$orders" type="orders"></x-list-group>
         </div>
     </div>
 @endsection

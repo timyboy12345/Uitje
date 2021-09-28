@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Order order
  * @property ReservationType reservationType
  * @property OrderLineLine[] orderLineLines
+ * @property string id
  * @property DateTime date
  * @property integer participants
  * @property integer accompanists

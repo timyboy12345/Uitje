@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class OrdersController extends Controller
 {
@@ -16,7 +19,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::orderByDesc('created_at')->paginate(10);
 
         return response()->view('dashboard.orders.index', compact(['orders']));
     }
@@ -26,20 +29,36 @@ class OrdersController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        $users = User::all()->map(function ($user) {
+            return [
+                'value' => $user->id,
+                'title' => $user->email
+            ];
+        });
+
+        return response()->view('dashboard.orders.create', compact(['users']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'user_id' => 'required|string|exists:users,id',
+        ]);
+
+        $order = new Order();
+        $order->id = Str::uuid()->toString();
+        $order->confirmation_code = Str::random(10);
+
+        $order->save();
+        return response()->redirectToRoute('dashboard.orders.show', $order->id);
     }
 
     /**
@@ -58,7 +77,7 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -70,7 +89,7 @@ class OrdersController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -81,7 +100,7 @@ class OrdersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)

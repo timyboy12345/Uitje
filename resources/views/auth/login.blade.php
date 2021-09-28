@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'Inloggen')
 
 @section('content')
     <div class="bg-white rounded p-4 shadow-sm">
