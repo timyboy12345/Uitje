@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string date_type
  * @property boolean has_participants
  * @property boolean has_accompanists
+ * @property double price
  * @package App\Models
  */
 class ReservationType extends Model
@@ -29,7 +30,7 @@ class ReservationType extends Model
         'extra'
     ];
 
-    protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists'];
+    protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists', 'price'];
 
     public function orders()
     {

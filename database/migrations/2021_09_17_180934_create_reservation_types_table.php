@@ -22,6 +22,7 @@ class CreateReservationTypesTable extends Migration
             $table->string('date_type')->nullable();
             $table->boolean('has_participants')->default(false);
             $table->boolean('has_accompanists')->default(false);
+            $table->double('price')->nullable();
             $table->timestamps();
 
             $table->softDeletes();

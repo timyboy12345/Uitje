@@ -11,11 +11,12 @@
             @method('PUT')
             @csrf
 
-            <x-dashboard.form-input type="text" id="title" label="Titel" :value="$reservationType->title" />
+            <x-dashboard.form-input type="text" id="title" label="Titel" :value="old('title', $reservationType->title)" />
             <x-dashboard.form-input type="textarea" id="description" label="Omschrijving" :value="old('description', $reservationType->description)" />
             <x-dashboard.form-input type="text" id="slug" label="URL" :value="old('slug', $reservationType->slug)" />
             <x-dashboard.form-input type="boolean" id="has_participants" label="Deelnemers" description="Selecteer om het mogelijk te maken een aantal deelnemers aan deze reservering toe te voegen." :value="old('has_participants', $reservationType->has_participants)" />
             <x-dashboard.form-input type="boolean" id="has_accompanists" label="Begeleiders" description="Selecteer om het mogelijk te maken een aantal begeleiders aan deze reservering toe te voegen." :value="old('has_accompanists', $reservationType->has_accompanists)" />
+            <x-dashboard.form-input type="number" id="price"  label="Prijs" :value="old('price', $reservationType->price)" />
 
             <x-dashboard.form-submit />
         </form>

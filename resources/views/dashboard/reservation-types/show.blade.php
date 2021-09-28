@@ -12,6 +12,11 @@
         <h5 class="text-indigo-800">Beschrijving</h5>
         {!! $reservationType->description !!}
 
+        @isset ($reservationType->price)
+            <h5 class="text-indigo-800 mt-4">Prijs</h5>
+            <p>{{ $reservationType->price }}</p>
+        @endisset
+
         <div class="flex flex-row mt-4 gap-2">
             @if ($reservationType->has_participants)
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

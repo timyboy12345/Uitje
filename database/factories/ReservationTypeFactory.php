@@ -30,7 +30,8 @@ class ReservationTypeFactory extends Factory
             'type' => $this->faker->randomElement(ReservationType::$reservationTypesEnum),
             'date_type' => $this->faker->randomElement([null, 'date', 'datetime']),
             'has_participants' => $this->faker->boolean,
-            'has_accompanists' => $this->faker->boolean
+            'has_accompanists' => $this->faker->boolean,
+            'price' => $this->faker->randomFloat(2, 0, 45)
         ];
     }
 }

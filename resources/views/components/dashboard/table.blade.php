@@ -3,7 +3,7 @@
         <h3 class="text-gray-800 text-sm mb-1">{{ $attributes->get('title') }}</h3>
     @endif
 
-    <div class="bg-white shadow-sm rounded overflow-x-auto">
+    <div class="mb-2 bg-white shadow-sm rounded overflow-x-auto">
         <table class="font-sans min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
             <tr>
@@ -98,6 +98,10 @@
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Begeleiders
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Prijs
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                         <span class="sr-only">Bekijken</span>
@@ -249,6 +253,13 @@
                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $item->has_accompanists ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $item->has_accompanists ? 'Ja' : 'Nee' }}
                                 </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
+                            @isset($item->price)
+                                <x-dashboard.pill>{{ $item->price }}</x-dashboard.pill>
+                            @else
+                                <x-dashboard.pill textcolor="text-gray-600" bgcolor="bg-gray-100">-</x-dashboard.pill>
+                            @endisset
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.reservation-types.show', $item->id) }}"

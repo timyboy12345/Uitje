@@ -19,6 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if (User::count() === 0) {
+            User::factory()->create([
+                'email' => 'help@rezer.nl',
+                'role' => 'admin'
+            ]);
+        }
+
         User::factory(5)->create();
         ReservationType::factory(6)
             ->has(ReservationTypeLine::factory()->count(4))

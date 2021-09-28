@@ -7,6 +7,7 @@ use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class ReservationTypesController extends Controller
 {
@@ -29,18 +30,33 @@ class ReservationTypesController extends Controller
      */
     public function create()
     {
-        //
+        return response()->view('dashboard.reservation-types.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:reservation_types,slug',
+            'description' => 'required|string',
+            'has_participants' => 'boolean',
+            'has_accompanists' => 'boolean',
+            'date_type' => 'nullable|string|max:255',
+            'price' => 'nullable|numeric|min:0'
+        ]);
+
+        $reservationType = new ReservationType();
+        $reservationType->id = Str::uuid()->toString();
+        $reservationType->fill($request->only($reservationType->getFillable()));
+        $reservationType->save();
+
+        return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);
     }
 
     /**
@@ -83,9 +99,10 @@ class ReservationTypesController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'has_participants' => 'boolean',
-            'has_accompanists' => 'boolean'
+            'has_accompanists' => 'boolean',
+            'price' => 'nullable|numeric|min:0'
         ]);
 
         $reservationType->update($request->only($reservationType->getFillable()));
