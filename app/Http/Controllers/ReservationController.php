@@ -6,10 +6,11 @@ use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\OrderLineLine;
 use App\Models\ReservationType;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ReservationController extends Controller
@@ -24,7 +25,7 @@ class ReservationController extends Controller
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
 
-        return view('reserve', compact(['reservationType']));
+        return view('reserve.reserve', compact(['reservationType']));
     }
 
     /**
@@ -57,18 +58,35 @@ class ReservationController extends Controller
             }
         }
 
+        if ($reservationType->has_participants) {
+            $rules['participants'] = 'required|numeric';
+        }
+
+        if ($reservationType->has_accompanists) {
+            $rules['accompanists'] = 'required|numeric';
+        }
+
+        if ($reservationType->date_type === 'date') {
+            $rules['date'] = 'required|string';
+        }
+
         $request->validate($rules);
 
         $order = new Order();
         $order->id = Str::uuid()->toString();
         $order->confirmation_code = Str::random(10);
-        $order->user_id = User::first()->id;
+        $order->user_id = Auth::id();
         $order->save();
 
         $orderLine = new OrderLine();
         $orderLine->id = Str::uuid()->toString();
         $orderLine->order_id = $order->id;
         $orderLine->reservation_type_id = $reservationType->id;
+
+        $orderLine->participants = $request->get('participants');
+        $orderLine->accompanists = $request->get('accompanists');
+        $orderLine->date = $request->get('date');
+
         $orderLine->save();
 
         foreach ($reservationType->reservationTypeLines as $line) {
@@ -94,6 +112,17 @@ class ReservationController extends Controller
             $orderLineLine->save();
         }
 
-        return redirect()->route('home');
+        return redirect()->route('reserve.thanks', $order->id);
+    }
+
+    /**
+     * @param string $id
+     * @return Response
+     */
+    public function thanks(string $id): Response
+    {
+        $order = Order::findOrFail($id);
+
+        return response()->view('reserve.thanks', compact(['order']));
     }
 }

@@ -24,8 +24,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
-Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
+Route::middleware('auth')->group(function () {
+    Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
+    Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
+
+    Route::get('thanks/{id}', [ReservationController::class, 'thanks'])->name('reserve.thanks');
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticationController::class, 'login'])->name('login');

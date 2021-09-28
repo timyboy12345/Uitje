@@ -2,7 +2,7 @@
     <label for="{{ $id }}">{{ $label }}</label>
 
     @if (in_array($type, ['text', 'number', 'date']))
-        <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}"
+        <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}" step="any"
                class="transition duration-100 rounded py-1 px-2 focus:ring-indigo-800 border-gray-200"
                value="{{ $value }}">
     @elseif($type === 'textarea')

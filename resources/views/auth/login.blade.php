@@ -4,8 +4,9 @@
 @section('content')
     <div class="bg-white rounded p-4 shadow-sm">
         <h1 class="text-lg font-bold text-secondary">Inloggen</h1>
+        <h2 class="text-sm text-gray-600">Je dient in te loggen om een reservering te plaatsen of een reservering in te zien.</h2>
 
-        <form method="post">
+        <form method="post" class="mt-4">
             @csrf
 
             <div class="flex flex-col mb-2">
