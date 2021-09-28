@@ -12,7 +12,7 @@
         <title>{{ config('app.name') }}</title>
     @endif
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-brown-50 text-gray-900 font-opensans mb-4">
 
@@ -55,5 +55,5 @@
 </div>
 </body>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 </html>
