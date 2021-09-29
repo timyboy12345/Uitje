@@ -155,7 +155,7 @@
                             {{ $item->email }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->created_at }}
+                            {{ \Carbon\Carbon::make($item->created_at)->toDateString() }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <x-dashboard.pill>{{ $item->role }}</x-dashboard.pill>
@@ -181,7 +181,9 @@
                             {{ $item->name }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->date ?? '-' }}
+                            @isset($item->date)
+                                {{ \Carbon\Carbon::make($item->date)->calendar() ?? '-' }}
+                            @endisset
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <span
@@ -206,7 +208,9 @@
                             {{ $item->reservationType->title }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->date }}
+                            @isset($item->date)
+                                {{ \Carbon\Carbon::make($item->date)->calendar() }}
+                            @endisset
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal">
                             <x-dashboard.pill>{{ $item->reservationType->type }}</x-dashboard.pill>

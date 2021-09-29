@@ -4,8 +4,12 @@
             @switch($type ?? 'orders')
                 @case('orders')
                 <a href="{{ route('orders.show', $item->id) }}"
-                   class="hover:bg-gray-100 transition duration-100 py-2 px-4">
-                    {{ $item->name }}
+                   class="hover:bg-gray-100 transition duration-100 py-2 px-4 flex flex-row">
+                    <div class="">{{ $item->name }}</div>
+
+                    @isset($item->date)
+                        <div class="text-gray-600 ml-2">{{ \Carbon\Carbon::make($item->date)->calendar() }}</div>
+                    @endisset
                 </a>
                 @break
                 @case('orderLines')
