@@ -6,11 +6,13 @@ use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\OrderLineLine;
 use App\Models\ReservationType;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class ReservationController extends Controller
@@ -70,12 +72,32 @@ class ReservationController extends Controller
             $rules['date'] = 'required|string';
         }
 
+        $user_id = '';
+        if (Auth::guest()) {
+            $rules['name'] = 'required|string|min:3';
+            $rules['email'] = 'required|email|unique:users,email';
+            $rules['password'] = 'required|string';
+        } else {
+            $user_id = Auth::id();
+        }
+
         $request->validate($rules);
+
+        if (Auth::guest()) {
+            $user = new User();
+            $user->id = Str::uuid()->toString();
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+
+            $user_id = $user->id;
+        }
 
         $order = new Order();
         $order->id = Str::uuid()->toString();
         $order->confirmation_code = Str::random(10);
-        $order->user_id = Auth::id();
+        $order->user_id = $user_id;
         $order->save();
 
         $orderLine = new OrderLine();

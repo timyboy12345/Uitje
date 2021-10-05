@@ -24,16 +24,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
-    Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
+Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
+Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
+Route::get('thanks/{id}', [ReservationController::class, 'thanks'])->name('reserve.thanks');
 
-    Route::get('thanks/{id}', [ReservationController::class, 'thanks'])->name('reserve.thanks');
+Route::middleware('auth')->group(function () {
+    Route::get('addExtra/{order_id}/{extra_id}', [ReservationController::class, 'index'])->name('addExtra.index');
+    Route::post('addExtra/{order_id}/{extra_id}', [ReservationController::class, 'store'])->name('addExtra.store');
+    Route::get('extraThanks/{id}', [ReservationController::class, 'thanks'])->name('addExtra.thanks');
 });
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticationController::class, 'login'])->name('login');
     Route::post('login', [AuthenticationController::class, 'loginPost']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('auth')->group(function () {

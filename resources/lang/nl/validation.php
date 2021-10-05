@@ -121,7 +121,7 @@ return [
     'starts_with'          => 'Dit moet starten met een van de volgende: :values.',
     'string'               => 'Dit moet een tekst zijn.',
     'timezone'             => 'Dit moet een geldige tijdzone zijn.',
-    'unique'               => 'Deze is al in gebruik',
+    'unique'               => 'Deze waarde is al in gebruik',
     'uploaded'             => 'Het uploaden hiervan is mislukt.',
     'url'                  => 'Dit moet een geldige URL zijn.',
     'uuid'                 => 'Dit moet een geldige UUID zijn.',

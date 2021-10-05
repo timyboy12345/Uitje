@@ -1,10 +1,10 @@
 <div class="flex flex-col my-3">
     <label for="{{ $id }}">{{ $label }}</label>
 
-    @if (in_array($type, ['text', 'number', 'date']))
+    @if (in_array($type, ['text', 'number', 'date', 'password', 'email']))
         <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}" step="any"
                class="transition duration-100 rounded py-1 px-2 focus:ring-secondary-800 border-gray-200"
-               value="{{ $value }}" placeholder="{{ $placeholder ?? '' }}">
+               value="{{ $value ?? '' }}" placeholder="{{ $placeholder ?? '' }}">
     @elseif($type === 'textarea')
         <textarea class="transition duration-100 rounded py-1 px-2 focus:ring-secondary-800 border-gray-200"
                   name="{{ $id }}" id="{{ $id }}">{{ $value }}</textarea>
@@ -37,7 +37,6 @@
                        class="transition duration-100 focus:ring-secondary focus:border-secondary rounded border-gray-200 py-1 px-2"
                        value="{{ old("{$id}postalcode") }}"
                 >
-                <p class="text-xs text-gray-400 mt-1">{{ $description }}</p>
 
                 @if ($errors->has("{$id}postalcode"))
                     @foreach ($errors->get("{$id}postalcode") as $message)
@@ -54,7 +53,6 @@
                        class="transition duration-100 focus:ring-secondary focus:border-secondary rounded border-gray-200 py-1 px-2"
                        value="{{ old("{$id}number") }}"
                 >
-                <p class="text-xs text-gray-400 mt-1">{{ $description }}</p>
 
                 @if ($errors->has("{$id}number"))
                     @foreach ($errors->get("{$id}number") as $message)
@@ -72,7 +70,6 @@
                        class="transition duration-100 focus:ring-secondary focus:border-secondary rounded border-gray-200 py-1 px-2"
                        value="{{ old("{$id}streetname") }}"
                 >
-                <p class="text-xs text-gray-400 mt-1">{{ $description }}</p>
 
                 @if ($errors->has("{$id}streetname"))
                     @foreach ($errors->get("{$id}streetname") as $message)
@@ -88,7 +85,6 @@
                        name="{{ $id }}city"
                        class="transition duration-100 focus:ring-secondary focus:border-secondary rounded border-gray-200 py-1 px-2"
                        value="{{ old("{$id}city") }}">
-                <p class="text-xs text-gray-400 mt-1">{{ $description }}</p>
 
                 @if ($errors->has("{$id}city"))
                     @foreach ($errors->get("{$id}city") as $message)
@@ -106,6 +102,9 @@
     @endif
 
     @error($id)
-    <div class="text-sm text-red-600">{{ $message }}</div>
+    <div class="text-sm text-red-600 flex flex-row items-center mt-0.5">
+        <i data-feather="alert-triangle" class="w-4 h-4 mr-1"></i>
+        {{ $message }}
+    </div>
     @enderror
 </div>

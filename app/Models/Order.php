@@ -68,4 +68,21 @@ class Order extends Model
 
         return null;
     }
+
+
+    /**
+     * Returns the main reservation of this order
+     * @return OrderLine|null
+     */
+    private function getMainReservation(): ?OrderLine
+    {
+        return $this->orderLines()->whereHas('reservationType', function ($query) {
+            $query->where('type', 'reservation')
+                ->whereNotNull('date');
+        })->first();
+    }
+
+    public function getMainReservationAttribute(): ?OrderLine {
+        return $this->getMainReservation();
+    }
 }

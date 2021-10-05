@@ -10,6 +10,14 @@
             <ul class="list-disc ml-8">
                 <li class="">Email: {{ \Illuminate\Support\Facades\Auth::user()->email }}</li>
             </ul>
+
+            <form method="post" class="mt-4" action="{{ route('logout') }}">
+                @csrf
+
+                <button type="submit" class="text-secondary hover:text-secondary-600 underline transition duration-100">
+                    Klik hier om uit te loggen
+                </button>
+            </form>
         </div>
 
         <div class="bg-white shadow-sm rounded p-4">

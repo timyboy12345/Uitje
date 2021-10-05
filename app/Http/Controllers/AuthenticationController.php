@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,5 +25,15 @@ class AuthenticationController extends Controller
         } else {
             return redirect()->back()->withErrors(['login' => 'Not Found'])->withInput($request->only(['email']));
         }
+    }
+
+    /**
+     * Log out the current user
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+        return response()->redirectToRoute('home');
     }
 }

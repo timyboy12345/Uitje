@@ -52,13 +52,8 @@ class ReservationType extends Model
         'has_accompanists' => 'boolean'
     ];
 
-    public function parent()
+    public function associated()
     {
-        return $this->belongsTo(ReservationType::class);
-    }
-
-    public function children()
-    {
-        return $this->hasMany(ReservationType::class);
+        return $this->belongsToMany(ReservationType::class, null, 'parent_id', 'child_id');
     }
 }
