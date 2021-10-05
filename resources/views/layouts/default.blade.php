@@ -19,19 +19,18 @@
 <div class="w-full mb-1 lg:my-3 bg-transparent text-white py-4 px-4">
     <div class="lg:max-w-5xl lg:mx-auto">
         <div class="flex flex-row gap-x-4 text-sm">
-            <a href="{{ route('home') }}"
+            <a href="{{ route('home', [\Illuminate\Support\Facades\Request::route('park')]) }}"
                class="opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
                 <i data-feather="home" class="w-5 mr-2 -my-2"></i>
                 Home
             </a>
 
             @auth()
-                <a href="{{ route('account') }}"
+                <a href="{{ route('account', [\Illuminate\Support\Facades\Request::route('park')]) }}"
                    class="ml-auto opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
                     <i data-feather="users" class="hidden md:block w-5 mr-2 -my-2"></i>
                     Account
                 </a>
-
                 @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
                     <a href="{{ route('dashboard.home') }}"
                        class="opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
@@ -40,7 +39,7 @@
                     </a>
                 @endif
             @else
-                <a href="{{ route('login') }}"
+                <a href="{{ route('login', [\Illuminate\Support\Facades\Request::route('park')]) }}"
                    class="ml-auto opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
                     <i data-feather="user" class="hidden md:block w-5 mr-2 -my-2"></i>
                     Inloggen

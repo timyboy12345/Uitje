@@ -11,7 +11,7 @@
                 <li class="">Email: {{ \Illuminate\Support\Facades\Auth::user()->email }}</li>
             </ul>
 
-            <form method="post" class="mt-4" action="{{ route('logout') }}">
+            <form method="post" class="mt-4" action="{{ route('logout', [\Illuminate\Support\Facades\Request::route('park')]) }}">
                 @csrf
 
                 <button type="submit" class="text-secondary hover:text-secondary-600 underline transition duration-100">

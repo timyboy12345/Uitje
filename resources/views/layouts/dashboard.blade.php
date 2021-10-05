@@ -23,7 +23,7 @@
     <nav class="w-full sm:fixed sm:h-screen sm:w-1/3 md:w-1/4 xl:w-1/5 bg-indigo-700 text-white p-4 shadow">
         <div class="lg:max-w-5xl lg:mx-auto">
             <div class="flex flex-col">
-                <a href="{{ route('home') }}" class="font-bold text-white text-xl">
+                <a href="/" class="font-bold text-white text-xl">
                     Uitje
                 </a>
 

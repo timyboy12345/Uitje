@@ -2,7 +2,7 @@
 @section('title', 'Reservering Plaatsen')
 
 @section('content')
-    <a href="{{ route('home') }}" class="block text-gray-400 text-sm mb-4">< Terug naar de homepagina</a>
+    <a href="{{ route('home', [\Illuminate\Support\Facades\Request::route('park')]) }}" class="block text-gray-400 text-sm mb-4">< Terug naar de homepagina</a>
 
     <form method="post" class="grid gap-4">
         @csrf
@@ -76,7 +76,7 @@
 
         <div class="p-4 bg-white rounded shadow-sm">
             <p class="text-sm text-gray-600">Door een reservering te maken ga je akkoord met de <a
-                    class="text-secondary underline" href="{{ route('home') }}">algemene voorwaarden</a>
+                    class="text-secondary underline" href="{{ route('home', [\Illuminate\Support\Facades\Request::route('park')]) }}">algemene voorwaarden</a>
                 van {{ config('app.name') }}.</p>
 
             <button type="submit"

@@ -21,7 +21,26 @@ class AuthenticationController extends Controller
         ]);
 
         if (Auth::attempt($request->only(['email', 'password']), true)) {
-            return redirect()->intended(route('home'));
+            return redirect()->intended(route('home', [$request->route('park')]));
+        } else {
+            return redirect()->back()->withErrors(['login' => 'Not Found'])->withInput($request->only(['email']));
+        }
+    }
+
+    public function loginBasic()
+    {
+        return view('landing.login');
+    }
+
+    public function loginBasicPost(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
+        if (Auth::attempt($request->only(['email', 'password']), true)) {
+            return redirect()->intended(route('dashboard.home'));
         } else {
             return redirect()->back()->withErrors(['login' => 'Not Found'])->withInput($request->only(['email']));
         }
@@ -29,11 +48,12 @@ class AuthenticationController extends Controller
 
     /**
      * Log out the current user
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function logout(): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-        return response()->redirectToRoute('home');
+        return response()->redirectToRoute('home', [$request->route('park')]);
     }
 }

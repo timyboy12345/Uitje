@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReservationType;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
-    public function home( ){
+    /**
+     * @param $park
+     * @return Response
+     */
+    public function home($park): Response
+    {
         $reservationTypes = ReservationType::where('type', 'reservation')->get();
 
-        return view('welcome', compact(['reservationTypes']));
+        return response()->view('welcome', compact(['reservationTypes']));
     }
 }

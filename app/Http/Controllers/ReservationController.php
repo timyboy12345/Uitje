@@ -20,10 +20,11 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param string $park
      * @param string $slug
      * @return View
      */
-    public function index(string $slug): View
+    public function index(string $park, string $slug): View
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
 
@@ -33,11 +34,12 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $park
      * @param string $slug
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(string $slug, Request $request): RedirectResponse
+    public function store(string $park, string $slug, Request $request): RedirectResponse
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
         $rules = [];
@@ -138,10 +140,11 @@ class ReservationController extends Controller
     }
 
     /**
+     * @param string $park
      * @param string $id
      * @return Response
      */
-    public function thanks(string $id): Response
+    public function thanks(string $park, string $id): Response
     {
         $order = Order::findOrFail($id);
 

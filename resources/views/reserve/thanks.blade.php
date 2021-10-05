@@ -10,7 +10,7 @@
             mailtje gestuurd met alle details en de status van je reservering. Deze informatie is ook terug te vinden in
             je account.</p>
 
-        <a href="{{ route('home') }}" class="text-secondary hover:text-secondary-600 transition duration-100 underline">
+        <a href="{{ route('home', [\Illuminate\Support\Facades\Request::route('park')]) }}" class="text-secondary hover:text-secondary-600 transition duration-100 underline">
             Ga terug naar de homepagina
         </a>
     </div>

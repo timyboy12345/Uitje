@@ -6,52 +6,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    /**
-     * @return array[]
-     */
-    public static function getMenuItems(): array
-    {
-        $menuItems = [
-            [
-                'title' => 'Home',
-                'icon' => 'home',
-                'route' => route('home')
-            ]
-        ];
-
-        if (Auth::guest()) {
-            $menuItems[] =
-                [
-                    'title' => 'Inloggen',
-                    'route' => route('login'),
-                    'icon' => 'user',
-                    'class' => 'md:ml-auto'
-                ];
-        } else {
-            $menuItems[] =
-                [
-                    'title' => 'Account',
-                    'route' => route('account'),
-                    'icon' => 'users',
-                    'class' => 'md:ml-auto'
-                ];
-
-            $menuItems[] =
-                [
-                    'title' => 'Dashboard',
-                    'route' => route('dashboard.home'),
-                    'icon' => 'settings'
-                ];
-        }
-
-        return $menuItems;
-    }
 
     public static function getDashboardMenuItems() {
         return [

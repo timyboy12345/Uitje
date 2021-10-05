@@ -3,7 +3,7 @@
         @foreach ($items as $item)
             @switch($type ?? 'orders')
                 @case('orders')
-                <a href="{{ route('orders.show', $item->id) }}"
+                <a href="{{ route('orders.show', [\Illuminate\Support\Facades\Request::route('park'), $item->id]) }}"
                    class="hover:bg-gray-100 transition duration-100 py-2 px-4 flex flex-row">
                     <div class="">{{ $item->name }}</div>
 
@@ -13,7 +13,7 @@
                 </a>
                 @break
                 @case('orderLines')
-                <a href="{{ route('orders.show', $item->id) }}"
+                <a href="{{ route('orders.show', [\Illuminate\Support\Facades\Request::route('park'), $item->id]) }}"
                    class="hover:bg-gray-100 transition duration-100 py-2 px-4">
                     {{ $item->reservationType->title }}
 

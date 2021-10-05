@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\CustomersController;
 use App\Http\Controllers\Dashboard\FrequentlyAskedQuestionController;
 use App\Http\Controllers\Dashboard\OrderLinesController;
 use App\Http\Controllers\Dashboard\ReservationTypesController;
+use App\Http\Controllers\ExtraReservationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ReservationController;
@@ -22,31 +23,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+$subdomain = config('app.env') === 'production' ? '{park}.rezer.nl' : '{park}.rezer.test';
+Route::domain($subdomain)->group(function () {
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
-Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
-Route::get('thanks/{id}', [ReservationController::class, 'thanks'])->name('reserve.thanks');
+    Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
+    Route::post('reserve/{id}', [ReservationController::class, 'store'])->name('reserve.store');
+    Route::get('thanks/{id}', [ReservationController::class, 'thanks'])->name('reserve.thanks');
 
-Route::middleware('auth')->group(function () {
-    Route::get('addExtra/{order_id}/{extra_id}', [ReservationController::class, 'index'])->name('addExtra.index');
-    Route::post('addExtra/{order_id}/{extra_id}', [ReservationController::class, 'store'])->name('addExtra.store');
-    Route::get('extraThanks/{id}', [ReservationController::class, 'thanks'])->name('addExtra.thanks');
+    Route::middleware('auth')->group(function () {
+        Route::get('addExtra/{order_id}/{extra_id}', [ExtraReservationController::class, 'index'])->name('addExtra.index');
+        Route::post('addExtra/{order_id}/{extra_id}', [ExtraReservationController::class, 'store'])->name('addExtra.store');
+        Route::get('extraThanks/{id}', [ExtraReservationController::class, 'thanks'])->name('addExtra.thanks');
+    });
+
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [AuthenticationController::class, 'login'])->name('login');
+        Route::post('login', [AuthenticationController::class, 'loginPost']);
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('account', [AccountController::class, 'account'])->name('account');
+
+        Route::resource('orders', OrdersController::class)->only(['index', 'show']);
+    });
+});
+
+Route::get('', function () {
+    return response()->view('landing.welcome');
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthenticationController::class, 'login'])->name('login');
-    Route::post('login', [AuthenticationController::class, 'loginPost']);
-});
-
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('account', [AccountController::class, 'account'])->name('account');
-
-    Route::resource('orders', OrdersController::class)->only(['index', 'show']);
+    Route::get('login', [AuthenticationController::class, 'loginBasic'])->name('loginBasic');
+    Route::post('login', [AuthenticationController::class, 'loginBasicPost']);
 });
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {

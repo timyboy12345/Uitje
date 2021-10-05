@@ -43,10 +43,11 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param string $park
      * @param string $id
      * @return Response
      */
-    public function show(string $id): Response
+    public function show(string $park, string $id): Response
     {
         $order = Order::where('user_id', Auth::id())->findOrFail($id);
         return response()->view('account.order', compact(['order']));

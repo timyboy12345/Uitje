@@ -58,7 +58,7 @@
                     <p class="mb-4">Deze extra is toe te voegen aan deze reservering. Druk daarvoor op onderstaande knop en beantwoord de gestelde vragen.</p>
 
                     <a class="py-2 px-4 text-white rounded bg-secondary hover:bg-secondary-600 transition duration-100"
-                       href="{{ route('addExtra.index', [$order->id, $extra->id]) }}">
+                       href="{{ route('addExtra.index', [\Illuminate\Support\Facades\Request::route('park'), $order->id, $extra->id]) }}">
                         Voeg toe aan reservering
                     </a>
                 </div>
