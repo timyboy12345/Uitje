@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string id
  * @property string name
  * @property string subdomain
+ * @property string domain
+ * @property string phonenumber
  */
 class Organization extends Model
 {

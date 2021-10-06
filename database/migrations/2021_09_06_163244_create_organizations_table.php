@@ -17,6 +17,8 @@ class CreateOrganizationsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('subdomain')->unique();
+            $table->string('domain')->nullable();
+            $table->string('phonenumber')->nullable();
             $table->timestamps();
 
             $table->softDeletes();

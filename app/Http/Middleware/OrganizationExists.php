@@ -22,10 +22,11 @@ class OrganizationExists
         $organization = Organization::where('subdomain', $subdomain)->first();
 
         if (!isset($organization)) {
-            return response()->json(['o' => $organization, 's' => $subdomain]);
+            return response()->view('errors.parknotfound', [], 404);
         }
 
-        Session::push('verified_organization_id', $organization->id);
+        Session::put('verified_organization_id', $organization->id);
+        Session::put('verified_organization_name', $organization->name);
 
         return $next($request);
     }

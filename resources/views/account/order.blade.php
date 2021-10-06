@@ -11,11 +11,14 @@
 
         <div class="bg-white rounded shadow-sm p-4">
             <h1 class="text-secondary font-bold text-lg">Algemene informatie</h1>
-            <h2 class="text-sm text-gray-600 mb-2">Informatie over deze reservering</h2>
+            <h2 class="text-sm text-gray-600  mb-2">Informatie over deze reservering</h2>
 
             <ul class="list-disc ml-8">
-                <li class="">Aangemaakt op: {{ $order->created_at }}</li>
-                <li class="">Datum: {{ $order->date }}</li>
+                <li>Aangemaakt op: {{ $order->created_at }}</li>
+
+                @isset($order->date)
+                    <li>Datum: {{ $order->date }}</li>
+                @endisset
             </ul>
         </div>
     </div>
@@ -55,7 +58,8 @@
             @foreach ($order->mainReservation->reservationType->associated as $extra)
                 <div class="bg-white p-4 rounded shadow-sm">
                     <h2 class="text-secondary font-bold">{{ $extra->title }}</h2>
-                    <p class="mb-4">Deze extra is toe te voegen aan deze reservering. Druk daarvoor op onderstaande knop en beantwoord de gestelde vragen.</p>
+                    <p class="mb-4">Deze extra is toe te voegen aan deze reservering. Druk daarvoor op onderstaande knop
+                        en beantwoord de gestelde vragen.</p>
 
                     <a class="py-2 px-4 text-white rounded bg-secondary hover:bg-secondary-600 transition duration-100"
                        href="{{ route('addExtra.index', [\Illuminate\Support\Facades\Request::route('park'), $order->id, $extra->id]) }}">

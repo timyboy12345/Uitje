@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @hasSection('title')
-        <title>@yield('title') / {{ config('app.name') }}</title>
+        <title>@yield('title') / {{ \Illuminate\Support\Facades\Session::get('verified_organization_name', config('app.name')) }}</title>
     @else
-        <title>{{ config('app.name') }}</title>
+        <title>{{ \Illuminate\Support\Facades\Session::get('verified_organization_name', config('app.name')) }}</title>
     @endif
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -19,6 +19,10 @@
 <div class="w-full mb-1 lg:my-3 bg-transparent text-white py-4 px-4">
     <div class="lg:max-w-5xl lg:mx-auto">
         <div class="flex flex-row gap-x-4 text-sm">
+            <div class="font-bold text-secondary text-lg">
+                {{ \Illuminate\Support\Facades\Session::get('verified_organization_name') }}
+            </div>
+
             <a href="{{ route('home', [\Illuminate\Support\Facades\Request::route('park')]) }}"
                class="opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
                 <i data-feather="home" class="w-5 mr-2 -my-2"></i>
