@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Order;
+use App\Models\ReservationType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
-class CustomersController extends Controller
+class ExtraReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param string $park
+     * @param string $order_id
+     * @param string $extra_id
      * @return Response
      */
-    public function index(): Response
+    public function index(string $park, string $order_id, string $extra_id): Response
     {
-        $customers = Auth::user()->organization->users()->paginate(10);
+        $order = Order::findOrFail($order_id);
+        $extra = ReservationType::findOrFail($extra_id);
 
-        return response()->view('dashboard.customers.index', compact(['customers']));
+        return response()->make('Not ready yet...', 500);
     }
 
     /**
@@ -46,14 +49,12 @@ class CustomersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $id
+     * @param  int  $id
      * @return Response
      */
-    public function show(string $id): Response
+    public function show($id)
     {
-        $customer = User::findOrFail($id);
-
-        return response()->view('dashboard.customers.show', compact(['customer']));
+        //
     }
 
     /**

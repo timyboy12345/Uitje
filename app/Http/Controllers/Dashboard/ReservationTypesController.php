@@ -7,6 +7,7 @@ use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ReservationTypesController extends Controller
@@ -18,7 +19,7 @@ class ReservationTypesController extends Controller
      */
     public function index(): Response
     {
-        $reservationTypes = ReservationType::paginate();
+        $reservationTypes = Auth::user()->organization->reservationTypes()->paginate();
 
         return response()->view('dashboard.reservation-types.index', compact(['reservationTypes']));
     }
@@ -54,6 +55,7 @@ class ReservationTypesController extends Controller
         $reservationType = new ReservationType();
         $reservationType->id = Str::uuid()->toString();
         $reservationType->fill($request->only($reservationType->getFillable()));
+        $reservationType->organization_id = Auth::user()->organization_id;
         $reservationType->save();
 
         return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);

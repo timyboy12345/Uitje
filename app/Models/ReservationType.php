@@ -56,4 +56,9 @@ class ReservationType extends Model
     {
         return $this->belongsToMany(ReservationType::class, null, 'parent_id', 'child_id');
     }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

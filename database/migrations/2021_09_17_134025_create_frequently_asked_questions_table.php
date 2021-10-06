@@ -15,10 +15,14 @@ class CreateFrequentlyAskedQuestionsTable extends Migration
     {
         Schema::create('frequently_asked_questions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('organization_id');
             $table->string('title');
             $table->text('content');
             $table->string('subject')->default('general');
+
             $table->timestamps();
+            
+            $table->foreign('organization_id')->references('id')->on('organizations');
         });
     }
 

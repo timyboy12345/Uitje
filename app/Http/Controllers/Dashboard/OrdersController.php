@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class OrdersController extends Controller
@@ -19,7 +20,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderByDesc('created_at')->paginate(10);
+        $orders = Auth::user()->organization->orders()->orderByDesc('created_at')->paginate(10);
 
         return response()->view('dashboard.orders.index', compact(['orders']));
     }
@@ -55,6 +56,7 @@ class OrdersController extends Controller
 
         $order = new Order();
         $order->id = Str::uuid()->toString();
+        $order->organization_id = Auth::user()->organization_id;
         $order->confirmation_code = Str::random(10);
 
         $order->save();

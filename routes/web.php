@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 $subdomain = config('app.env') === 'production' ? '{park}.rezer.nl' : '{park}.rezer.test';
-Route::domain($subdomain)->group(function () {
+Route::domain($subdomain)->middleware(['organizationExists'])->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('reserve/{id}', [ReservationController::class, 'index'])->name('reserve.index');
@@ -62,12 +62,18 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthenticationController::class, 'loginBasicPost']);
 });
 
-Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
-    Route::get('', [\App\Http\Controllers\Dashboard\HomeController::class, 'home'])->name('home');
+Route::post('logout', [AuthenticationController::class, 'logoutBasic'])->name('logoutBasic');
 
-    Route::resource('customers', CustomersController::class);
-    Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
-    Route::resource('reservation-types', ReservationTypesController::class);
-    Route::resource('orderLines', OrderLinesController::class);
-    Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
-});
+Route::middleware('auth')
+    ->middleware(['hasOrganization'])
+    ->prefix('dashboard')
+    ->name('dashboard.')
+    ->group(function () {
+        Route::get('', [\App\Http\Controllers\Dashboard\HomeController::class, 'home'])->name('home');
+
+        Route::resource('customers', CustomersController::class);
+        Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
+        Route::resource('reservation-types', ReservationTypesController::class);
+        Route::resource('orderLines', OrderLinesController::class);
+        Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
+    });

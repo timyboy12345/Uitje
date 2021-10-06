@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\OrderLineLine;
+use App\Models\Organization;
 use App\Models\ReservationType;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -43,6 +44,8 @@ class ReservationController extends Controller
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
         $rules = [];
+
+        $organisation = Organization::where('subdomain', $request->route('park'))->first();
 
         foreach ($reservationType->reservationTypeLines as $line) {
             switch ($line->type) {
@@ -100,6 +103,7 @@ class ReservationController extends Controller
         $order->id = Str::uuid()->toString();
         $order->confirmation_code = Str::random(10);
         $order->user_id = $user_id;
+        $order->organization_id = $organisation->id;
         $order->save();
 
         $orderLine = new OrderLine();
@@ -136,7 +140,7 @@ class ReservationController extends Controller
             $orderLineLine->save();
         }
 
-        return redirect()->route('reserve.thanks', $order->id);
+        return redirect()->route('reserve.thanks', [$request->route('park'), $order->id]);
     }
 
     /**

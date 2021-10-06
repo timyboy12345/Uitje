@@ -15,6 +15,7 @@ class CreateReservationTypesTable extends Migration
     {
         Schema::create('reservation_types', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('organization_id');
             $table->string('title');
             $table->text('description');
             $table->string('type')->default('reservation');
@@ -26,6 +27,8 @@ class CreateReservationTypesTable extends Migration
             $table->timestamps();
 
             $table->softDeletes();
+
+            $table->foreign('organization_id')->references('id')->on('organizations');
         });
 
         Schema::create('reservation_type_reservation_type', function(Blueprint $table) {

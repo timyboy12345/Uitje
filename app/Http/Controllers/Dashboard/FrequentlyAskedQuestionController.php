@@ -8,6 +8,7 @@ use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class FrequentlyAskedQuestionController extends Controller
@@ -19,7 +20,7 @@ class FrequentlyAskedQuestionController extends Controller
      */
     public function index()
     {
-        $faqs = FrequentlyAskedQuestion::paginate();
+        $faqs = Auth::user()->organization->frequentlyAskedQuestions()->paginate();
 
         return response()->view('dashboard.frequently-asked-questions.index', compact(['faqs']));
     }
@@ -53,6 +54,7 @@ class FrequentlyAskedQuestionController extends Controller
         $faq->id = Str::uuid()->toString();
         $faq->fill($request->only($faq->getFillable()));
         $faq->subject = $request->filled('subject') ? $request->get('subject') : 'general';
+        $faq->organization_id = Auth::user()->organization_id;
 
         $faq->save();
 

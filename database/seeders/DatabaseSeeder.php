@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\FrequentlyAskedQuestion;
 use App\Models\Order;
 use App\Models\OrderLine;
+use App\Models\Organization;
 use App\Models\ReservationType;
 use App\Models\ReservationTypeLine;
 use App\Models\User;
@@ -26,36 +27,46 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        User::factory(5)->create();
-        ReservationType::factory(6)
-            ->has(ReservationTypeLine::factory()->count(4))
-            ->create();
-
-        User::all()->each(function ($user) {
-            Order::factory(rand(0, 3))
+        Organization::factory()->create()->each(function ($organization) {
+            ReservationType::factory(6)
+                ->has(ReservationTypeLine::factory()->count(4))
                 ->create([
-                    'user_id' => $user->id,
-                ])
-                ->each(function ($order) {
-                    $reservationType = ReservationType::where('type', 'reservation')->get()->random();
-                    $rand = rand(1, 4);
+                    'organization_id' => $organization->id
+                ]);
 
-                    OrderLine::factory(1)->create([
-                        'reservation_type_id' => $reservationType->id,
-                        'order_id' => $order->id
-                    ]);
+            User::factory(5)->create([
+                'organization_id' => $organization->id
+            ]);
 
-                    if ($rand > 1) {
-                        $extraReservationType = ReservationType::where('type', 'extra')->get()->random();
+            User::all()->each(function ($user) use ($organization) {
+                Order::factory(rand(0, 3))
+                    ->create([
+                        'user_id' => $user->id,
+                        'organization_id' => $organization->id
+                    ])
+                    ->each(function ($order) {
+                        $reservationType = ReservationType::where('type', 'reservation')->get()->random();
+                        $rand = rand(1, 4);
 
-                        OrderLine::factory($rand - 1)->create([
-                            'reservation_type_id' => $extraReservationType->id,
+                        OrderLine::factory(1)->create([
+                            'reservation_type_id' => $reservationType->id,
                             'order_id' => $order->id
                         ]);
-                    }
-                });
-        });
 
-        FrequentlyAskedQuestion::factory(15)->create();
+                        if ($rand > 1) {
+                            $extraReservationType = ReservationType::where('type', 'extra')->get()->random();
+
+                            OrderLine::factory($rand - 1)->create([
+                                'reservation_type_id' => $extraReservationType->id,
+                                'order_id' => $order->id
+                            ]);
+                        }
+                    });
+            });
+
+            FrequentlyAskedQuestion::factory(15)->create([
+                'organization_id' => $organization->id
+            ]);
+        });
     }
 }

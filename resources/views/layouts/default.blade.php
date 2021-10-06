@@ -31,13 +31,6 @@
                     <i data-feather="users" class="hidden md:block w-5 mr-2 -my-2"></i>
                     Account
                 </a>
-                @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
-                    <a href="{{ route('dashboard.home') }}"
-                       class="opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">
-                        <i data-feather="settings" class="hidden md:block w-5 mr-2 -my-2"></i>
-                        Dashboard
-                    </a>
-                @endif
             @else
                 <a href="{{ route('login', [\Illuminate\Support\Facades\Request::route('park')]) }}"
                    class="ml-auto opacity-70 text-secondary hover:opacity-100 flex flex-row items-center">

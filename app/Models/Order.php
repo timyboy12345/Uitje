@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string user_id The UUID of the user attached to this order
  * @property string confirmation_code The confirmation code of this order
  * @property User user
+ * @property string organization_id The organisation UUID
  */
 class Order extends Model
 {
@@ -27,6 +28,11 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
     }
 
     /**
@@ -82,7 +88,8 @@ class Order extends Model
         })->first();
     }
 
-    public function getMainReservationAttribute(): ?OrderLine {
+    public function getMainReservationAttribute(): ?OrderLine
+    {
         return $this->getMainReservation();
     }
 }

@@ -9,6 +9,7 @@ use App\Models\ReservationType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class OrderLinesController extends Controller
@@ -64,6 +65,7 @@ class OrderLinesController extends Controller
         $orderLine->id = Str::uuid()->toString();
         $orderLine->order_id = $request->get('order_id');
         $orderLine->reservation_type_id = $request->get('reservation_type_id');
+        $orderLine->organization_id = Auth::user()->organization_id;
         $orderLine->fill($request->only($orderLine->getFillable()));
         $orderLine->save();
 

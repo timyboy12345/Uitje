@@ -16,8 +16,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string email_verified_at
  * @property string password
  * @property string remember_token
+ * @property string role
  * @property string created_at
  * @property string updated_at
+ * @property string hashedEmail
  * @package App\Models
  */
 class User extends Authenticatable
@@ -58,6 +60,10 @@ class User extends Authenticatable
 
     public function orders() {
         return $this->hasMany(Order::class);
+    }
+
+    public function organization() {
+        return $this->belongsTo(Organization::class);
     }
 
 

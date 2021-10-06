@@ -56,4 +56,15 @@ class AuthenticationController extends Controller
         Auth::logout();
         return response()->redirectToRoute('home', [$request->route('park')]);
     }
+
+    /**
+     * Log out the current user
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logoutBasic(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        return response()->redirectTo('/');
+    }
 }

@@ -15,8 +15,13 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-900 font-opensans mb-4">
-<div class="w-full text-right text-gray-800 flex flex-row py-2 px-4 justify-end">
+<div class="w-full text-right text-gray-800 flex flex-row py-2 px-4 justify-end gap-x-4">
     @auth
+        <form method="post" action="{{ route('logoutBasic') }}">
+            @csrf
+            <button class="opacity-70 hover:opacity-100 transition duration-100" type="submit">Uitloggen</button>
+        </form>
+
         <a href="{{ route('dashboard.home') }}"
            class="opacity-70 hover:opacity-100 transition duration-100">Dashboard</a>
     @else
