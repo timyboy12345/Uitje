@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Dashboard\CustomersController;
 use App\Http\Controllers\Dashboard\FrequentlyAskedQuestionController;
 use App\Http\Controllers\Dashboard\OrderLinesController;
+use App\Http\Controllers\Dashboard\ReservationTypeLinesController;
 use App\Http\Controllers\Dashboard\ReservationTypesController;
 use App\Http\Controllers\ExtraReservationController;
 use App\Http\Controllers\HomeController;
@@ -76,4 +77,5 @@ Route::middleware('auth')
         Route::resource('reservation-types', ReservationTypesController::class);
         Route::resource('orderLines', OrderLinesController::class);
         Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
+        Route::resource('reservation-type-lines', ReservationTypeLinesController::class);
     });

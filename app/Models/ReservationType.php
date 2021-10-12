@@ -32,11 +32,6 @@ class ReservationType extends Model
 
     protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists', 'price'];
 
-    public function orders()
-    {
-        return $this->hasManyThrough(Order::class, OrderLine::class);
-    }
-
     public function orderLines()
     {
         return $this->hasMany(OrderLine::class);

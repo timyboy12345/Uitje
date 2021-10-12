@@ -22,6 +22,13 @@ class ReservationTypeLine extends Model
 
     use HasFactory;
 
+    protected $fillable = [
+        'label',
+        'description',
+        'placeholder',
+        'is_required'
+    ];
+
     public static $reservationTypeLineEnum = [
         'string',
         'number',

@@ -17,27 +17,27 @@ class Controller extends BaseController
                 'title' => 'Home',
                 'icon' => 'home',
                 'route' => route('dashboard.home'),
-                'routeName' => 'dashboard.home'
+                'routeName' => ''
             ], [
                 'title' => 'Klanten',
                 'icon' => 'users',
                 'route' => route('dashboard.customers.index'),
-                'routeName' => 'dashboard.customers.index'
+                'routeName' => 'customers'
             ], [
                 'title' => 'Reserveringen',
                 'icon' => 'bookmark',
                 'route' => route('dashboard.orders.index'),
-                'routeName' => 'dashboard.orders.index'
+                'routeName' => 'orders'
             ], [
                 'title' => 'Reserveringstypes',
                 'icon' => 'book',
                 'route' => route('dashboard.reservation-types.index'),
-                'routeName' => 'dashboard.reservation-types.index'
+                'routeName' => 'reservation-types'
             ], [
                 'title' => 'FAQ\'s',
                 'icon' => 'help-circle',
                 'route' => route('dashboard.frequently-asked-questions.index'),
-                'routeName' => 'dashboard.frequently-asked-questions.index'
+                'routeName' => 'frequently-asked-questions'
             ]
         ];
     }

@@ -33,7 +33,11 @@
     </x-dashboard.card>
 
     <div class="lg:col-span-2">
-        <x-dashboard.table :items="$reservationType->orderLines" type="orderLines"
-                           title="Orders met dit reserveringstype"></x-dashboard.table>
+        <x-dashboard.table :items="$reservationType->reservationTypeLines" type="reservationTypeLines"
+                           title="Vragen die bij dit reserveringstype horen"></x-dashboard.table>
+
+        <a href="{{ route('dashboard.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]) }}" class="rounded bg-indigo-700 hover:bg-indigo-800 transition duration-100 py-2 px-4 text-white mt-2 text-sm inline-block">
+            Nieuwe vraag toevoegen
+        </a>
     </div>
 @endsection

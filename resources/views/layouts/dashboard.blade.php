@@ -30,7 +30,7 @@
                 <div class="mt-8 flex flex-col">
                     @foreach (\App\Http\Controllers\Controller::getDashboardMenuItems() as $menuItem)
                         <a href="{{ $menuItem['route'] }}"
-                           class="{{ isset($menuItem['routeName']) && $menuItem['routeName'] === \Illuminate\Support\Facades\Route::getCurrentRoute()->getName() ? 'bg-indigo-800' : '' }} rounded p-2 flex flex-row items-center opacity-70">
+                           class="{{ isset($menuItem['routeName']) && request()->segment(2) === $menuItem['routeName'] ? 'bg-indigo-800' : '' }} rounded p-2 flex flex-row items-center opacity-70">
                             @isset($menuItem['icon'])
                                 <i class="mr-2 w-5 h-5" data-feather="{{ $menuItem['icon'] }}"></i>
                             @endisset
@@ -80,6 +80,13 @@
                             <i data-feather="trash" class="w-4"></i>
                         </button>
                     </form>
+                @endif
+
+                @hasSection('cannotDestroyMessage')
+                    <div title="@yield('cannotDestroyMessage')"
+                       class="flex items-center content-center bg-gray-600 hover:bg-gray-700 opacity-70 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
+                        <i data-feather="trash" class="w-4"></i>
+                    </div>
                 @endif
 
                 @hasSection('editDestination')
