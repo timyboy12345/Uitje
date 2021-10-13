@@ -8,6 +8,7 @@ use App\Models\ReservationTypeLine;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ReservationTypeLinesController extends Controller
@@ -29,7 +30,7 @@ class ReservationTypeLinesController extends Controller
      */
     public function create()
     {
-        $reservationTypes = ReservationType::all()->map(function ($reservationType) {
+        $reservationTypes = Auth::user()->organization->reservationTypes->map(function ($reservationType) {
             return [
                 'value' => $reservationType->id,
                 'title' => $reservationType->title
@@ -54,13 +55,14 @@ class ReservationTypeLinesController extends Controller
             'description' => 'nullable|string|max:255',
             'placeholder' => 'nullable|string|max:255',
             'is_required' => 'nullable|boolean',
-            'type' => 'required|string',
+            'type' => 'required|string|in:text,number,date,password,email,textarea,boolean,select,address',
             'reservation_type_id' => 'required|exists:reservation_types,id'
         ]);
 
         $reservationTypeLine = new ReservationTypeLine();
         $reservationTypeLine->id = Str::uuid()->toString();
         $reservationTypeLine->reservation_type_id = $request->get('reservation_type_id');
+        $reservationTypeLine->type = $request->get('type');
         $reservationTypeLine->fill($request->only($reservationTypeLine->getFillable()));
         $reservationTypeLine->is_required = $request->has('is_required');
         $reservationTypeLine->save();

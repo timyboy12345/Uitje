@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('title', 'Reserveringstype')
 @section('subtitle', $reservationType->title)
+@section('createDestination', route('dashboard.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]))
 @section('editDestination', route('dashboard.reservation-types.edit', $reservationType->id))
 @section('destroyDestination', route('dashboard.reservation-types.destroy', $reservationType->id))
 

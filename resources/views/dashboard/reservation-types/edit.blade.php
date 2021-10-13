@@ -16,6 +16,7 @@
             <x-dashboard.form-input type="text" id="slug" label="URL" :value="old('slug', $reservationType->slug)" />
             <x-dashboard.form-input type="boolean" id="has_participants" label="Deelnemers" description="Selecteer om het mogelijk te maken een aantal deelnemers aan deze reservering toe te voegen." :value="old('has_participants', $reservationType->has_participants)" />
             <x-dashboard.form-input type="boolean" id="has_accompanists" label="Begeleiders" description="Selecteer om het mogelijk te maken een aantal begeleiders aan deze reservering toe te voegen." :value="old('has_accompanists', $reservationType->has_accompanists)" />
+            <x-dashboard.form-input type="select" id="date_type" label="Datum" description="Selecteer het datumtype dat voor deze reservering nodig is." :value="old('date_type', $reservationType->date_type)" :options="$dateTypes" />
             <x-dashboard.form-input type="number" id="price"  label="Prijs" :value="old('price', $reservationType->price)" />
 
             <x-dashboard.form-submit />

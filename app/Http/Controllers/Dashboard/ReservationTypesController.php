@@ -83,8 +83,9 @@ class ReservationTypesController extends Controller
     public function edit(string $id): Response
     {
         $reservationType = ReservationType::findOrFail($id);
+        $dateTypes = $this->getDateTypes();
 
-        return response()->view('dashboard.reservation-types.edit', compact(['reservationType']));
+        return response()->view('dashboard.reservation-types.edit', compact(['reservationType', 'dateTypes']));
     }
 
     /**
@@ -126,5 +127,18 @@ class ReservationTypesController extends Controller
         $reservationType = ReservationType::findOrFail($id);
         $reservationType->delete();
         return response()->redirectToRoute('dashboard.reservation-types.index');
+    }
+
+    private function getDateTypes() {
+        return [[
+            'value' => 'date',
+            'title' => 'Datum'
+        ], [
+            'value' => 'datetime',
+            'title' => 'Datum en Tijd'
+        ], [
+            'value' => 'time',
+            'title' => 'Tijd'
+        ]];
     }
 }
