@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
-use App\Models\ReservationType;
+use App\Models\Organization;
 use Illuminate\Http\Response;
 
 class HomeController extends Controller
@@ -14,8 +14,9 @@ class HomeController extends Controller
      */
     public function home($park): Response
     {
-        $reservationTypes = ReservationType::where('type', 'reservation')->get();
+        $organization = Organization::where('subdomain', $park)->firstOrFail();
+        $reservationTypes = $organization->reservationTypes()->where('type', 'reservation')->get();
 
-        return response()->view('welcome', compact(['reservationTypes']));
+        return response()->view('welcome', compact(['organization', 'reservationTypes']));
     }
 }
