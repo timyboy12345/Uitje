@@ -31,7 +31,7 @@ class OrderLine extends Model
     }
 
     public function reservationType() {
-        return $this->belongsTo(ReservationType::class);
+        return $this->belongsTo(ReservationType::class)->withTrashed();
     }
 
     public function orderLineLines() {
