@@ -22,7 +22,7 @@ class HomepageTest extends ShopTestCase
     }
 
     /**
-     * Test if an existing organization .
+     * Test if an existing organization shop can be found.
      *
      * @return void
      */

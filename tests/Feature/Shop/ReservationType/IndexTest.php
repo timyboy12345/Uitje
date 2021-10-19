@@ -26,8 +26,8 @@ class IndexTest extends ShopTestCase
             'organization_id' => $this->getOrganization()->id
         ]);
 
-        $response = $this->get("{$this->getUrl()}/{$reservationType->id}");
+        $response = $this->get("{$this->getUrl()}/reserve/{$reservationType->slug}");
 
-        $response->assertStatus(404);
+        $response->assertStatus(200);
     }
 }

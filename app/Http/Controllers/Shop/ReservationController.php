@@ -82,7 +82,7 @@ class ReservationController extends Controller
         if (Auth::guest()) {
             $rules['name'] = 'required|string|min:3';
             $rules['email'] = 'required|email|unique:users,email';
-            $rules['password'] = 'required|string';
+            $rules['password'] = 'required|string|min:8';
         } else {
             $user_id = Auth::id();
         }
