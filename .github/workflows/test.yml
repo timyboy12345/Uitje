@@ -2,7 +2,7 @@ name: Test and Deploy
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ '**' ]
 
 jobs:
   test:
@@ -33,27 +33,22 @@ jobs:
           SESSION_DRIVER: array
           QUEUE_DRIVER: sync
         run: vendor/bin/phpunit
-  deploy:
-    runs-on: ubuntu-20.04
-    needs:
-      - test
+  phpcs:
+    runs-on: ubuntu-latest
     steps:
-      - uses: fifsky/ssh-action@master
+      - uses: actions/checkout@v2
         with:
-          command: |
-            cd /var/www/rezer.nl
-            php artisan down --render="errors::503"
-            git reset --hard
-            git pull
-            composer install --optimize-autoloader --no-dev
-            php artisan migrate --force
-            npm run prod
-            php artisan cache:clear
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:clear
-            php artisan up
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
-          pass: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
+          fetch-depth: 0 # important!
+
+      # we may use whatever way to install phpcs, just specify the path on the next step
+      # however, curl seems to be the fastest
+      - name: Install PHP_CodeSniffer
+        run: |
+          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+          php phpcs.phar --version
+
+      - uses: tinovyatkin/action-php-codesniffer@v1
+        with:
+          files: "**.php" # you may customize glob as needed
+          phpcs_path: php phpcs.phar
+          standard: phpcs.xml

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservationType;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -52,13 +53,23 @@ class ReservationTypesController extends Controller
             'price' => 'nullable|numeric|min:0'
         ]);
 
+        /** @var User $user */
+        $user = Auth::user();
+
         $reservationType = new ReservationType();
         $reservationType->id = Str::uuid()->toString();
         $reservationType->fill($request->only($reservationType->getFillable()));
-        $reservationType->organization_id = Auth::user()->organization_id;
+        $reservationType->organization_id = $user->organization_id;
         $reservationType->save();
 
         return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);
+    }
+
+    public function postFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file'
+        ]);
     }
 
     /**
@@ -129,7 +140,11 @@ class ReservationTypesController extends Controller
         return response()->redirectToRoute('dashboard.reservation-types.index');
     }
 
-    private function getDateTypes() {
+    /**
+     * @return string[][]
+     */
+    private function getDateTypes(): array
+    {
         return [[
             'value' => 'date',
             'title' => 'Datum'

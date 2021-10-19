@@ -51,7 +51,7 @@ class OrdersController extends Controller
     public function show(string $park, string $id): Response
     {
         $order = Order::where('user_id', Auth::id())->findOrFail($id);
-        return response()->view('account.order', compact(['order']));
+        return response()->view('shop.account.order', compact(['order']));
     }
 
     /**

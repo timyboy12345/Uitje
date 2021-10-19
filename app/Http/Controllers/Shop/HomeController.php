@@ -17,6 +17,6 @@ class HomeController extends Controller
         $organization = Organization::where('subdomain', $park)->firstOrFail();
         $reservationTypes = $organization->reservationTypes()->where('type', 'reservation')->get();
 
-        return response()->view('welcome', compact(['organization', 'reservationTypes']));
+        return response()->view('shop.welcome', compact(['organization', 'reservationTypes']));
     }
 }

@@ -30,7 +30,7 @@ class ReservationController extends Controller
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
 
-        return view('reserve.reserve', compact(['reservationType']));
+        return view('shop.reserve.reserve', compact(['reservationType']));
     }
 
     /**
@@ -153,6 +153,6 @@ class ReservationController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        return response()->view('reserve.thanks', compact(['order']));
+        return response()->view('shop.reserve.thanks', compact(['order']));
     }
 }

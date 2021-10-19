@@ -11,11 +11,17 @@ class AuthenticationController extends Controller
 {
     public function login()
     {
-        return view('auth.login');
+        return view('shop.auth.login');
     }
 
-    public function loginPost(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function loginPost(Request $request): RedirectResponse
     {
+        // TODO: Only log in users in the correct organization
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string'

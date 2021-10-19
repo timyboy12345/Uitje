@@ -16,6 +16,6 @@ class AccountController extends Controller
     {
         $orders = Auth::user()->orders;
 
-        return response()->view('account.account', compact(['orders']));
+        return response()->view('shop.account.account', compact(['orders']));
     }
 }

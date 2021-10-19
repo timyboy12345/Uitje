@@ -14,6 +14,10 @@
                    class="mr-2 rounded transition duration-100" {{ $value == true ? 'checked' : '' }}>
             <div class="text-gray-600">{{ $description }}</div>
         </div>
+    @elseif($type === 'file')
+        <div class="flex flex-row items-center">
+            <input id="{{ $id }}" name="{{ $id }}" type="file" class="mr-2 rounded transition duration-100">
+        </div>
     @elseif($type === 'select')
         <select id="{{ $id }}" name="{{ $id }}"
                 class="mr-2 rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">

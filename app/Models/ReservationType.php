@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Optix\Media\HasMedia;
 
 /**
  * Class ReservationType
@@ -17,13 +18,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property boolean has_participants
  * @property boolean has_accompanists
  * @property double price
+ * @property string organization_id
  * @package App\Models
  */
 class ReservationType extends Model
 {
     public $incrementing = false;
 
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasMedia;
 
     public static $reservationTypesEnum = [
         'reservation',

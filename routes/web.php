@@ -55,7 +55,7 @@ Route::domain($subdomain)->middleware(['organizationExists'])->group(function ()
 });
 
 Route::get('', function () {
-    return response()->view('landing.welcome');
+    return response()->view('marketing.welcome');
 });
 
 Route::middleware('guest')->group(function () {
@@ -74,6 +74,8 @@ Route::middleware(['hasOrganization', 'auth'])
         Route::resource('customers', CustomersController::class);
         Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
         Route::resource('reservation-types', ReservationTypesController::class);
+        Route::post('reservation-types/{id}/upload', [ReservationTypesController::class, 'postFile'])->name('reservation-types.upload');
+
         Route::resource('orderLines', OrderLinesController::class);
         Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
         Route::resource('reservation-type-lines', ReservationTypeLinesController::class);

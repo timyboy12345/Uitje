@@ -23,9 +23,9 @@ class ShopTestCase extends TestCase
     }
 
     /**
-     * @return mixed
+     * @return Organization
      */
-    public function getOrganization()
+    public function getOrganization(): Organization
     {
         return $this->organization;
     }
