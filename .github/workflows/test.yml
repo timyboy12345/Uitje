@@ -55,7 +55,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install dependencies
         run: composer install --prefer-dist --no-suggest --no-progress
-      - name: Install PHPCS globally
-        run: composer global require "squizlabs/php_codesniffer=*"
+      - name: Install PHPCS
+        run: curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
       - name: Detect coding standard violations
-        run: ~/.config/composer/vendor/bin/phpcs -q --report=checkstyle | cs2pr --graceful-warnings
+        run: php phpcs.phar -q --report=checkstyle | cs2pr --graceful-warnings
