@@ -35,7 +35,7 @@ class PostTest extends ShopTestCase
             ->post("{$this->getUrl()}/reserve/{$reservationType->slug}", [
                 'name' => 'test',
                 'email' => 'test@gmail.com',
-                'password' => 'password'
+                'password' => 'password',
             ]);
 
         /** @var Order $order */
@@ -58,7 +58,7 @@ class PostTest extends ShopTestCase
             ->post("{$this->getUrl()}/reserve/{$reservationType->slug}", [
                 'name' => 'test',
                 'email' => 'test',
-                'password' => 'password'
+                'password' => 'password',
             ]);
 
         $response->assertSessionHasErrors(['email']);
@@ -78,7 +78,7 @@ class PostTest extends ShopTestCase
             ->post("{$this->getUrl()}/reserve/{$reservationType->slug}", [
                 'name' => 'test',
                 'email' => 'test@test.com',
-                'password' => 'short'
+                'password' => 'short',
             ]);
 
         $response->assertSessionHasErrors(['password']);

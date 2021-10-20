@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
+ *
  * @property string id
  * @property string name
  * @property string email
@@ -59,20 +60,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 
-    public function organization() {
+    public function organization()
+    {
         return $this->belongsTo(Organization::class);
     }
 
-
     /**
      * Return the hashed email for Gravatar (https://nl.gravatar.com/site/implement/hash/)
+     *
      * @return string
      */
-    public function getHashedEmailAttribute(): string {
+    public function getHashedEmailAttribute(): string
+    {
         return md5($this->email);
     }
 }

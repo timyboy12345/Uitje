@@ -20,13 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (User::count() === 0) {
-            User::factory()->create([
-                'email' => 'help@rezer.nl',
-                'role' => 'admin'
-            ]);
-        }
-
         Organization::factory()->create()->each(function ($organization) {
             ReservationType::factory(6)
                 ->has(ReservationTypeLine::factory()->count(4))
@@ -68,5 +61,13 @@ class DatabaseSeeder extends Seeder
                 'organization_id' => $organization->id
             ]);
         });
+
+        if (User::count() === 5) {
+            User::factory()->create([
+                'email' => 'help@rezer.nl',
+                'role' => 'admin',
+                'organization_id' => Organization::first()->id
+            ]);
+        }
     }
 }

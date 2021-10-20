@@ -19,6 +19,7 @@
         <exclude name="Generic.Commenting.DocComment.NonParamGroup"/>
         <exclude name="Generic.Commenting.DocComment.ContentAfterOpen"/>
         <exclude name="Generic.Commenting.DocComment.ContentBeforeClose"/>
+        <exclude name="Generic.Commenting.DocComment.MissingShort"/>
     </rule>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
     <rule ref="Generic.Files.ByteOrderMark"/>
@@ -156,6 +157,7 @@
     <exclude-pattern>*/Http/Kernel.php</exclude-pattern>
     <exclude-pattern>*/Providers/*</exclude-pattern>
     <exclude-pattern>*/resources/lang/*</exclude-pattern>
+    <exclude-pattern>*/*.mix.js</exclude-pattern>
 
     <arg name="colors"/>
     <arg value="spv"/>

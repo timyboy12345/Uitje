@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Optix\Media\HasMedia;
 
 /**
  * Class ReservationType
+ *
  * @property string id
  * @property string title
  * @property string description
@@ -19,17 +19,18 @@ use Optix\Media\HasMedia;
  * @property boolean has_accompanists
  * @property double price
  * @property string organization_id
+ * @property string image
  * @package App\Models
  */
 class ReservationType extends Model
 {
     public $incrementing = false;
 
-    use HasFactory, SoftDeletes, HasMedia;
+    use HasFactory, SoftDeletes;
 
     public static $reservationTypesEnum = [
         'reservation',
-        'extra'
+        'extra',
     ];
 
     protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists', 'price'];
@@ -46,7 +47,7 @@ class ReservationType extends Model
 
     protected $casts = [
         'has_participants' => 'boolean',
-        'has_accompanists' => 'boolean'
+        'has_accompanists' => 'boolean',
     ];
 
     public function associated()

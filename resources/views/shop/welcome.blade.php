@@ -10,13 +10,18 @@
             @foreach ($reservationTypes as $reservationType)
                 <a href="{{ route('reserve.index', [\Illuminate\Support\Facades\Request::route('park'), $reservationType->slug]) }}"
                    class="bg-secondary hover:bg-secondary-600 transition duration-100 text-white rounded shadow overflow-hidden">
-                    <img
-                        src="https://images.unsplash.com/photo-1531956531700-dc0ee0f1f9a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
-                        class="max-h-32 object-cover w-full object-center">
+                    @isset($reservationType->image)
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($reservationType->image) }}"
+                             class="max-h-32 object-cover w-full object-center"
+                             alt="Afbeelding voor {{ $reservationType->title }}">
+                    @endisset
 
                     <div class="p-4">
                         <h2 class="font-bold">{{ $reservationType->title }}</h2>
-                        <p class="text-sm opacity-80">Vanaf 6 kinderen</p>
+
+                        @isset($reservationType->minParticipants)
+                            <p class="text-sm opacity-80">Vanaf {{ $reservationType->minParticipants }} deelnemers</p>
+                        @endisset
                     </div>
                 </a>
             @endforeach

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Organization
+ *
  * @package App\Models
  * @property string id
  * @property string name
@@ -25,19 +26,23 @@ class Organization extends Model
         'name'
     ];
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 
-    public function reservationTypes() {
+    public function reservationTypes()
+    {
         return $this->hasMany(ReservationType::class);
     }
 
-    public function frequentlyAskedQuestions() {
+    public function frequentlyAskedQuestions()
+    {
         return $this->hasMany(FrequentlyAskedQuestion::class);
     }
 }

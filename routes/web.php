@@ -74,7 +74,6 @@ Route::middleware(['hasOrganization', 'auth'])
         Route::resource('customers', CustomersController::class);
         Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
         Route::resource('reservation-types', ReservationTypesController::class);
-        Route::post('reservation-types/{id}/upload', [ReservationTypesController::class, 'postFile'])->name('reservation-types.upload');
 
         Route::resource('orderLines', OrderLinesController::class);
         Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);

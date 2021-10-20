@@ -14,22 +14,27 @@ class AuthenticationController extends Controller
         return view('marketing.login');
     }
 
-    public function loginPost(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function loginPost(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         if (Auth::attempt($request->only(['email', 'password']), true)) {
             return redirect()->intended(route('dashboard.home'));
         } else {
-            return redirect()->back()->withErrors(['login' => 'Not Found'])->withInput($request->only(['email']));
+            return redirect()->back()->withErrors(['email' => __('auth.faile')])->withInput($request->only(['email']));
         }
     }
 
     /**
      * Log out the current user
+     *
      * @return RedirectResponse
      */
     public function logout(): RedirectResponse

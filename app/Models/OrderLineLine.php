@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrderLineLine
- * 
+ *
  * @property string id
  * @property string order_line_id
  * @property string reservation_type_line_id
@@ -29,6 +29,6 @@ class OrderLineLine extends Model
     }
 
     protected $casts = [
-        'data' => 'object'
+        'data' => 'object',
     ];
 }

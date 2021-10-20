@@ -24,7 +24,7 @@ class AuthenticationController extends Controller
 
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         if (Auth::attempt($request->only(['email', 'password']), true)) {
@@ -36,6 +36,7 @@ class AuthenticationController extends Controller
 
     /**
      * Log out the current user
+     *
      * @param Request $request
      * @return RedirectResponse
      */

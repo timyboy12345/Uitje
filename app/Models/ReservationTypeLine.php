@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ReservationTypeLine
+ *
  * @property string id
  * @property string reservation_type_id
  * @property string label
@@ -26,7 +27,7 @@ class ReservationTypeLine extends Model
         'label',
         'description',
         'placeholder',
-        'is_required'
+        'is_required',
     ];
 
     public static $reservationTypeLineEnum = [
@@ -36,11 +37,12 @@ class ReservationTypeLine extends Model
         'address',
     ];
 
-    public function reservationType() {
+    public function reservationType()
+    {
         return $this->belongsTo(ReservationType::class);
     }
 
     protected $casts = [
-        'is_required' => 'boolean'
+        'is_required' => 'boolean',
     ];
 }

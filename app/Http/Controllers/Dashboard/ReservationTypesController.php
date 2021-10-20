@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Optix\Media\MediaUploader;
 
 class ReservationTypesController extends Controller
 {
@@ -31,7 +30,7 @@ class ReservationTypesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         return response()->view('dashboard.reservation-types.create');
     }
@@ -67,29 +66,6 @@ class ReservationTypesController extends Controller
     }
 
     /**
-     * Uploads a file and associates it with an existing reservation type.
-     *
-     * @param string $id
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function postFile(string $id, Request $request): RedirectResponse
-    {
-        $request->validate([
-            'file' => 'required|file'
-        ]);
-
-        $img = $request->file('file');
-        MediaUploader::fromFile($img)->upload();
-
-        /** @var ReservationType $reservationType */
-        $reservationType = ReservationType::findOrFail($id);
-        $reservationType->attachMedia($img);
-
-        return response()->redirectToRoute('dashboard.reservation-types.show', $id);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param string $id
@@ -121,7 +97,7 @@ class ReservationTypesController extends Controller
      *
      * @param Request $request
      * @param string $id
-     * @return RedirectResponse
+     * @return false|RedirectResponse|string
      */
     public function update(Request $request, string $id)
     {
@@ -133,13 +109,21 @@ class ReservationTypesController extends Controller
             'description' => 'required|string',
             'has_participants' => 'boolean',
             'has_accompanists' => 'boolean',
-            'price' => 'nullable|numeric|min:0'
+            'price' => 'nullable|numeric|min:0',
+            'image' => 'nullable|file'
         ]);
 
         $reservationType->update($request->only($reservationType->getFillable()));
         $reservationType->has_participants = $request->has('has_participants');
         $reservationType->has_accompanists = $request->has('has_accompanists');
         $reservationType->save();
+
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $location = $file->store('reservation-types');
+            $reservationType->image = $location;
+            $reservationType->save();
+        }
 
         return response()->redirectToRoute('dashboard.reservation-types.show', [$reservationType->id]);
     }
@@ -162,15 +146,17 @@ class ReservationTypesController extends Controller
      */
     private function getDateTypes(): array
     {
-        return [[
-            'value' => 'date',
-            'title' => 'Datum'
-        ], [
-            'value' => 'datetime',
-            'title' => 'Datum en Tijd'
-        ], [
-            'value' => 'time',
-            'title' => 'Tijd'
-        ]];
+        return [
+            [
+                'value' => 'date',
+                'title' => 'Datum',
+            ], [
+                'value' => 'datetime',
+                'title' => 'Datum en Tijd',
+            ], [
+                'value' => 'time',
+                'title' => 'Tijd',
+            ],
+        ];
     }
 }

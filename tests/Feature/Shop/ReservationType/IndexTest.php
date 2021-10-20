@@ -23,7 +23,7 @@ class IndexTest extends ShopTestCase
     {
         /** @var ReservationType $reservationType */
         $reservationType = ReservationType::factory()->create([
-            'organization_id' => $this->getOrganization()->id
+            'organization_id' => $this->getOrganization()->id,
         ]);
 
         $response = $this->get("{$this->getUrl()}/reserve/{$reservationType->slug}");

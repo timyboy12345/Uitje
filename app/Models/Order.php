@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * Class Order
+ *
  * @property OrderLine[] orderLines
  * @property string id The UUID of this order
  * @property string user_id The UUID of the user attached to this order
@@ -37,10 +39,12 @@ class Order extends Model
 
     /**
      * Returns the name of this reservation, defaults to the name of the user
+     *
      * @return string
      */
     public function getNameAttribute(): string
     {
+        /** @var ?OrderLine $upperOrderLine */
         $upperOrderLine = $this->orderLines()->whereHas('reservationType', function ($query) {
             $query->where('type', 'reservation');
         })->first();
@@ -78,6 +82,7 @@ class Order extends Model
 
     /**
      * Returns the main reservation of this order
+     *
      * @return OrderLine|null
      */
     private function getMainReservation(): ?OrderLine

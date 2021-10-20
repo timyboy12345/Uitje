@@ -32,7 +32,7 @@ class HomepageTest extends TestCase
     {
         /** @var User $user */
         $user = User::factory()->create([
-            'role' => 'admin'
+            'role' => 'admin',
         ]);
 
         $response = $this->actingAs($user)->get('/dashboard');
@@ -53,7 +53,7 @@ class HomepageTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create([
             'role' => 'admin',
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
 
         $response = $this->actingAs($user)->get('/dashboard');

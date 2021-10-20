@@ -18,7 +18,7 @@ class FrequentlyAskedQuestionController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         $faqs = Auth::user()->organization->frequentlyAskedQuestions()->paginate();
 
@@ -30,7 +30,7 @@ class FrequentlyAskedQuestionController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         $selectOptions = $this->getSelectOptions();
         return response()->view('dashboard.frequently-asked-questions.create', compact('selectOptions'));
@@ -47,7 +47,7 @@ class FrequentlyAskedQuestionController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'subject' => 'nullable|string'
+            'subject' => 'nullable|string',
         ]);
 
         $faq = new FrequentlyAskedQuestion();
@@ -77,10 +77,10 @@ class FrequentlyAskedQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param string $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(string $id): Response
     {
         $faq = FrequentlyAskedQuestion::findOrFail($id);
         $selectOptions = $this->getSelectOptions();
@@ -102,7 +102,7 @@ class FrequentlyAskedQuestionController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'subject' => 'nullable|string'
+            'subject' => 'nullable|string',
         ]);
 
         $faq->update($request->only($faq->getFillable()));
@@ -123,18 +123,21 @@ class FrequentlyAskedQuestionController extends Controller
         return response()->redirectToRoute('dashboard.frequently-asked-questions.index');
     }
 
-    public function getSelectOptions()
+    /**
+     * @return ReservationType[]
+     */
+    public function getSelectOptions(): array
     {
         $subjects = ReservationType::all()->map(function ($question) {
             return [
                 'value' => $question->id,
-                'title' => $question->title
+                'title' => $question->title,
             ];
         });
 
         $subjects[] = [
             'value' => 'general',
-            'title' => 'Generiek'
+            'title' => 'Generiek',
         ];
 
         return $subjects;

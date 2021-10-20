@@ -32,6 +32,7 @@ class ShopTestCase extends TestCase
 
     /**
      * Return the full URL of the organization
+     *
      * @return string
      */
     public function getUrl(): string

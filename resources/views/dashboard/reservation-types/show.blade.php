@@ -33,28 +33,14 @@
         </div>
     </x-dashboard.card>
 
-    <x-dashboard.card title="Media" subtitle="Dit is alle media die aan dit reserveringstype is gekoppeld.">
-        <div class="grid @if($reservationType->hasMedia()) grid-cols-2 @endif gap-4">
-            @if (!$reservationType->hasMedia())
-                <div class="text-gray-600">Er is nog geen media toegevoegd.</div>
-            @endif
-
-            @foreach ($reservationType->getMedia() as $media)
-                @json($media)
-            @endforeach
+    @isset($reservationType->image)
+        <div class="rounded shadow-sm overflow-hidden max-h-64">
+            <img class="object-cover object-center" alt="Afbeelding van dit reserveringstype"
+                 src="{{ \Illuminate\Support\Facades\Storage::url($reservationType->image) }}">
         </div>
-
-        <form enctype="multipart/form-data" method="post"
-              action="{{ route('dashboard.reservation-types.upload', [$reservationType->id]) }}">
-            @csrf
-            <x-dashboard.form-input id="file" label="Bestand" type="file"></x-dashboard.form-input>
-
-            <button type="submit"
-                    class="py-2 px-4 bg-indigo-700 hover:bg-indigo-800 transition duration-100 text-white rounded">
-                Upload afbeelding
-            </button>
-        </form>
-    </x-dashboard.card>
+    @else
+        Geen afbeelding
+    @endisset
 
     <div class="lg:col-span-2">
         <x-dashboard.table :items="$reservationType->reservationTypeLines" type="reservationTypeLines"

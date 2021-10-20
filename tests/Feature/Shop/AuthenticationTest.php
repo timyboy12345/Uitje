@@ -39,7 +39,7 @@ class AuthenticationTest extends ShopTestCase
         $response = $this
             ->post("{$this->getUrl()}/login", [
                 'email' => 'test@test.com',
-                'password' => 'invalid'
+                'password' => 'invalid',
             ]);
 
         $response->assertSessionHasErrors(['login']);
@@ -53,7 +53,7 @@ class AuthenticationTest extends ShopTestCase
         $response = $this
             ->post("{$this->getUrl()}/login", [
                 'email' => $user->email,
-                'password' => 'password'
+                'password' => 'password',
             ]);
 
         $response->assertSessionHasNoErrors()->assertRedirect();
