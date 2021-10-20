@@ -28,12 +28,14 @@
         </div>
     </div>
 
-    <div class="p-4 bg-white rounded shadow-sm mt-4">
-        @foreach(\App\Models\FrequentlyAskedQuestion::all()->where('subject', 'general') as $question)
-            <div class="@if (!$loop->last) mb-4 @endif">
-                <h1 class="font-bold text-secondary text-lg">{{ $question->title }}</h1>
-                <p class="text-gray-600 text-sm">{!! $question->content !!}</p>
-            </div>
-        @endforeach
-    </div>
+    @if ($frequentlyAskedQuestions->count() > 0)
+        <div class="p-4 bg-white rounded shadow-sm mt-4">
+            @foreach($frequentlyAskedQuestions as $question)
+                <div class="@if (!$loop->last) mb-4 @endif">
+                    <h1 class="font-bold text-secondary text-lg">{{ $question->title }}</h1>
+                    <p class="text-gray-600 text-sm">{!! $question->content !!}</p>
+                </div>
+            @endforeach
+        </div>
+    @endif
 @endsection

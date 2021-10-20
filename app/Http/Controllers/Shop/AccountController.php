@@ -12,7 +12,8 @@ class AccountController extends Controller
      * @param $park
      * @return Response
      */
-    public function account($park): Response {
+    public function account($park): Response
+    {
         $orders = Auth::user()->orders;
 
         return response()->view('shop.account.account', compact(['orders']));
