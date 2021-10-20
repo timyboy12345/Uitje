@@ -20,7 +20,7 @@ class CreateMediaTable extends Migration
 
         Schema::create('mediables', function (Blueprint $table) {
             $table->unsignedBigInteger('media_id')->index();
-            $table->unsignedBigInteger('mediable_id')->index();
+            $table->uuid('mediable_id')->index();
             $table->string('mediable_type');
             $table->string('group');
 

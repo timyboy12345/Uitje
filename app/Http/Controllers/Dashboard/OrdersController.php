@@ -35,7 +35,7 @@ class OrdersController extends Controller
         $users = User::all()->map(function ($user) {
             return [
                 'value' => $user->id,
-                'title' => $user->email
+                'title' => $user->email,
             ];
         });
 

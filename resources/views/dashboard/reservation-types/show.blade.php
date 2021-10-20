@@ -44,14 +44,15 @@
             @endforeach
         </div>
 
-        <form method="post" action="{{ route('dashboard.reservation-types.upload', [$reservationType->id]) }}">
+        <form enctype="multipart/form-data" method="post"
+              action="{{ route('dashboard.reservation-types.upload', [$reservationType->id]) }}">
             @csrf
             <x-dashboard.form-input id="file" label="Bestand" type="file"></x-dashboard.form-input>
 
-            @json(\Illuminate\Support\Facades\Session::all())
-            <a href="" class="py-2 px-4 bg-indigo-700 hover:bg-indigo-800 transition duration-100 text-white rounded">
+            <button type="submit"
+                    class="py-2 px-4 bg-indigo-700 hover:bg-indigo-800 transition duration-100 text-white rounded">
                 Upload afbeelding
-            </a>
+            </button>
         </form>
     </x-dashboard.card>
 

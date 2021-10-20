@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class OrderLineLine
+ * 
  * @property string id
  * @property string order_line_id
  * @property string reservation_type_line_id
@@ -22,7 +23,8 @@ class OrderLineLine extends Model
 
     protected $fillable = ['value', 'data'];
 
-    public function reservationTypeLine() {
+    public function reservationTypeLine()
+    {
         return $this->belongsTo(ReservationTypeLine::class);
     }
 

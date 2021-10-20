@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Optix\Media\MediaUploader;
 
 class ReservationTypesController extends Controller
 {
@@ -65,11 +66,27 @@ class ReservationTypesController extends Controller
         return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);
     }
 
-    public function postFile(Request $request)
+    /**
+     * Uploads a file and associates it with an existing reservation type.
+     *
+     * @param string $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function postFile(string $id, Request $request): RedirectResponse
     {
         $request->validate([
             'file' => 'required|file'
         ]);
+
+        $img = $request->file('file');
+        MediaUploader::fromFile($img)->upload();
+
+        /** @var ReservationType $reservationType */
+        $reservationType = ReservationType::findOrFail($id);
+        $reservationType->attachMedia($img);
+
+        return response()->redirectToRoute('dashboard.reservation-types.show', $id);
     }
 
     /**
