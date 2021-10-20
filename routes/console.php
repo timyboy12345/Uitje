@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('phpcs', function () {
+    exec('~/.composer/vendor/bin/phpcs', $output);
+
+    // print output from command
+    $this->comment(implode(PHP_EOL, $output));
+})->purpose('Run PHPCS locally');

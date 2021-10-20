@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,6 @@ class AccountController extends Controller
     {
         $orders = Auth::user()->orders;
 
-        return response()->view('account.account', compact(['orders']));
+        return response()->view('shop.account.account', compact(['orders']));
     }
 }

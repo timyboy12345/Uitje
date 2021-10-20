@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservationType;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -29,7 +30,7 @@ class ReservationTypesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         return response()->view('dashboard.reservation-types.create');
     }
@@ -52,10 +53,13 @@ class ReservationTypesController extends Controller
             'price' => 'nullable|numeric|min:0'
         ]);
 
+        /** @var User $user */
+        $user = Auth::user();
+
         $reservationType = new ReservationType();
         $reservationType->id = Str::uuid()->toString();
         $reservationType->fill($request->only($reservationType->getFillable()));
-        $reservationType->organization_id = Auth::user()->organization_id;
+        $reservationType->organization_id = $user->organization_id;
         $reservationType->save();
 
         return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);
@@ -93,7 +97,7 @@ class ReservationTypesController extends Controller
      *
      * @param Request $request
      * @param string $id
-     * @return RedirectResponse
+     * @return false|RedirectResponse|string
      */
     public function update(Request $request, string $id)
     {
@@ -105,13 +109,21 @@ class ReservationTypesController extends Controller
             'description' => 'required|string',
             'has_participants' => 'boolean',
             'has_accompanists' => 'boolean',
-            'price' => 'nullable|numeric|min:0'
+            'price' => 'nullable|numeric|min:0',
+            'image' => 'nullable|file'
         ]);
 
         $reservationType->update($request->only($reservationType->getFillable()));
         $reservationType->has_participants = $request->has('has_participants');
         $reservationType->has_accompanists = $request->has('has_accompanists');
         $reservationType->save();
+
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $location = $file->store('reservation-types');
+            $reservationType->image = $location;
+            $reservationType->save();
+        }
 
         return response()->redirectToRoute('dashboard.reservation-types.show', [$reservationType->id]);
     }
@@ -129,16 +141,22 @@ class ReservationTypesController extends Controller
         return response()->redirectToRoute('dashboard.reservation-types.index');
     }
 
-    private function getDateTypes() {
-        return [[
-            'value' => 'date',
-            'title' => 'Datum'
-        ], [
-            'value' => 'datetime',
-            'title' => 'Datum en Tijd'
-        ], [
-            'value' => 'time',
-            'title' => 'Tijd'
-        ]];
+    /**
+     * @return string[][]
+     */
+    private function getDateTypes(): array
+    {
+        return [
+            [
+                'value' => 'date',
+                'title' => 'Datum',
+            ], [
+                'value' => 'datetime',
+                'title' => 'Datum en Tijd',
+            ], [
+                'value' => 'time',
+                'title' => 'Tijd',
+            ],
+        ];
     }
 }

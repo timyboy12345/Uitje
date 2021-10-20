@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\ReservationType;
 use App\Models\ReservationTypeLine;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,7 +17,7 @@ class ReservationTypeLinesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         //
     }
@@ -28,16 +27,26 @@ class ReservationTypeLinesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         $reservationTypes = Auth::user()->organization->reservationTypes->map(function ($reservationType) {
             return [
                 'value' => $reservationType->id,
-                'title' => $reservationType->title
+                'title' => $reservationType->title,
             ];
         });
 
-        $types = [['value' => 'text', 'title' => 'Tekst'], ['value' => 'number', 'title' => 'Nummer'], ['value' => 'date', 'title' => 'Datum'], ['value' => 'password', 'title' => 'Wachtwoord'], ['value' => 'email', 'title' => 'Email'], ['value' => 'textarea', 'title' => 'Lange tekst'], ['value' => 'boolean', 'title' => 'Ja/Nee'], ['value' => 'select', 'title' => 'Opties'], ['value' => 'address', 'title' => 'Adres']];
+        $types = [
+            ['value' => 'text', 'title' => 'Tekst'],
+            ['value' => 'number', 'title' => 'Nummer'],
+            ['value' => 'date', 'title' => 'Datum'],
+            ['value' => 'password', 'title' => 'Wachtwoord'],
+            ['value' => 'email', 'title' => 'Email'],
+            ['value' => 'textarea', 'title' => 'Lange tekst'],
+            ['value' => 'boolean', 'title' => 'Ja/Nee'],
+            ['value' => 'select', 'title' => 'Opties'],
+            ['value' => 'address', 'title' => 'Adres'],
+        ];
 
         return response()->view('dashboard.reservation-type-lines.create', compact(['reservationTypes', 'types']));
     }
@@ -56,7 +65,7 @@ class ReservationTypeLinesController extends Controller
             'placeholder' => 'nullable|string|max:255',
             'is_required' => 'nullable|boolean',
             'type' => 'required|string|in:text,number,date,password,email,textarea,boolean,select,address',
-            'reservation_type_id' => 'required|exists:reservation_types,id'
+            'reservation_type_id' => 'required|exists:reservation_types,id',
         ]);
 
         $reservationTypeLine = new ReservationTypeLine();
@@ -109,7 +118,7 @@ class ReservationTypeLinesController extends Controller
             'label' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'placeholder' => 'nullable|string|max:255',
-            'is_required' => 'nullable|boolean'
+            'is_required' => 'nullable|boolean',
         ]);
 
         $reservationTypeLine = ReservationTypeLine::findOrFail($id);
@@ -124,10 +133,10 @@ class ReservationTypeLinesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param string $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(string $id): Response
     {
         //
     }

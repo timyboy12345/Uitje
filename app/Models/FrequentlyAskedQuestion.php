@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * Class FrequentlyAskedQuestion
+ *
+ * @property string id
  * @property string title
  * @property string content
  * @property string subject
- * Class FrequentlyAskedQuestion
+ * @property string organization_id
  * @package App\Models
  */
 class FrequentlyAskedQuestion extends Model
@@ -27,7 +30,8 @@ class FrequentlyAskedQuestion extends Model
             ->get();
     }
 
-    public function getParsedSubjectAttribute() {
+    public function getParsedSubjectAttribute()
+    {
         if (ReservationType::where('id', '=', $this->subject)->exists()) {
             return ReservationType::find($this->subject)->title;
         }

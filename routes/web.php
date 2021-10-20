@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Marketing\AuthenticationController;
+use App\Http\Controllers\Shop\AccountController;
 use App\Http\Controllers\Dashboard\CustomersController;
 use App\Http\Controllers\Dashboard\FrequentlyAskedQuestionController;
 use App\Http\Controllers\Dashboard\OrderLinesController;
 use App\Http\Controllers\Dashboard\ReservationTypeLinesController;
 use App\Http\Controllers\Dashboard\ReservationTypesController;
-use App\Http\Controllers\ExtraReservationController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Shop\ExtraReservationController;
+use App\Http\Controllers\Shop\HomeController;
+use App\Http\Controllers\Shop\OrdersController;
+use App\Http\Controllers\Shop\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,12 +39,12 @@ Route::domain($subdomain)->middleware(['organizationExists'])->group(function ()
     });
 
     Route::middleware('guest')->group(function () {
-        Route::get('login', [AuthenticationController::class, 'login'])->name('login');
-        Route::post('login', [AuthenticationController::class, 'loginPost']);
+        Route::get('login', [\App\Http\Controllers\Shop\AuthenticationController::class, 'login'])->name('login');
+        Route::post('login', [\App\Http\Controllers\Shop\AuthenticationController::class, 'loginPost']);
     });
 
     Route::middleware('auth')->group(function () {
-        Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
+        Route::post('logout', [\App\Http\Controllers\Shop\AuthenticationController::class, 'logout'])->name('logout');
     });
 
     Route::middleware('auth')->group(function () {
@@ -55,18 +55,17 @@ Route::domain($subdomain)->middleware(['organizationExists'])->group(function ()
 });
 
 Route::get('', function () {
-    return response()->view('landing.welcome');
+    return response()->view('marketing.welcome');
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthenticationController::class, 'loginBasic'])->name('loginBasic');
-    Route::post('login', [AuthenticationController::class, 'loginBasicPost']);
+    Route::get('login', [AuthenticationController::class, 'login'])->name('loginBasic');
+    Route::post('login', [AuthenticationController::class, 'loginPost']);
 });
 
-Route::post('logout', [AuthenticationController::class, 'logoutBasic'])->name('logoutBasic');
+Route::post('logout', [AuthenticationController::class, 'logout'])->name('logoutBasic');
 
-Route::middleware('auth')
-    ->middleware(['hasOrganization'])
+Route::middleware(['hasOrganization', 'auth'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
@@ -75,6 +74,7 @@ Route::middleware('auth')
         Route::resource('customers', CustomersController::class);
         Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
         Route::resource('reservation-types', ReservationTypesController::class);
+
         Route::resource('orderLines', OrderLinesController::class);
         Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
         Route::resource('reservation-type-lines', ReservationTypeLinesController::class);

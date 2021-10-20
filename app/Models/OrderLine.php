@@ -9,10 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class OrderLine
- * @property Order order
- * @property ReservationType reservationType
- * @property OrderLineLine[] orderLineLines
+ *
  * @property string id
+ * @property string order_id
+ * @property Order order
+ * @property string reservation_type_id
+ * @property ReservationType reservationType
+ * @property string organization_id
+ * @property Organization organization
+ * @property OrderLineLine[] orderLineLines
  * @property DateTime date
  * @property integer participants
  * @property integer accompanists
@@ -26,19 +31,22 @@ class OrderLine extends Model
 
     protected $fillable = ['date', 'participants', 'accompanists'];
 
-    public function order() {
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 
-    public function reservationType() {
-        return $this->belongsTo(ReservationType::class);
+    public function reservationType()
+    {
+        return $this->belongsTo(ReservationType::class)->withTrashed();
     }
 
-    public function orderLineLines() {
+    public function orderLineLines()
+    {
         return $this->hasMany(OrderLineLine::class);
     }
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
     ];
 }

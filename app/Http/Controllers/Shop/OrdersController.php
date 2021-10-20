@@ -1,28 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\ReservationType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
-class ExtraReservationController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param string $park
-     * @param string $order_id
-     * @param string $extra_id
      * @return Response
      */
-    public function index(string $park, string $order_id, string $extra_id): Response
+    public function index()
     {
-        $order = Order::findOrFail($order_id);
-        $extra = ReservationType::findOrFail($extra_id);
-
-        return response()->make('Not ready yet...', 500);
+        //
     }
 
     /**
@@ -49,12 +44,14 @@ class ExtraReservationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param string $park
+     * @param string $id
      * @return Response
      */
-    public function show($id)
+    public function show(string $park, string $id): Response
     {
-        //
+        $order = Order::where('user_id', Auth::id())->findOrFail($id);
+        return response()->view('shop.account.order', compact(['order']));
     }
 
     /**

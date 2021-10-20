@@ -19,7 +19,7 @@ class OrderLinesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         //
     }
@@ -29,19 +29,19 @@ class OrderLinesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
-        $reservationTypes = ReservationType::all()->map(function($type) {
+        $reservationTypes = ReservationType::all()->map(function ($type) {
             return [
                 'value' => $type->id,
-                'title' => "{$type->title} / {$type->type}"
+                'title' => "{$type->title} / {$type->type}",
             ];
         });
 
-        $orders = Order::all()->map(function($order) {
+        $orders = Order::all()->map(function ($order) {
             return [
                 'value' => $order->id,
-                'title' => $order->id
+                'title' => $order->id,
             ];
         });
 
@@ -58,7 +58,7 @@ class OrderLinesController extends Controller
     {
         $request->validate([
             'order_id' => 'required|string|exists:orders,id',
-            'reservation_type_id' => 'required|string|exists:reservation_types,id'
+            'reservation_type_id' => 'required|string|exists:reservation_types,id',
         ]);
 
         $orderLine = new OrderLine();

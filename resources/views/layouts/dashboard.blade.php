@@ -44,7 +44,7 @@
     </nav>
 
     <div class="w-full sm:w-2/3 md:w-3/4 xl:w-4/5 sm:ml-auto">
-        <div class="flex flex-row justify-between items-center w-full p-4">
+        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center w-full p-4">
             <div class="flex flex-col">
                 <h2 class="text-indigo-800 text-lg font-bold">
                     @yield('title', 'Dashboard')
@@ -56,10 +56,10 @@
                 @endif
             </div>
 
-            <div class="flex flex-row items-center gap-x-2">
+            <div class="flex mt-2 lg:mt-0 flex-row items-center gap-x-2">
                 @hasSection('enableSearch')
                     <input type="text"
-                           class="py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
+                           class="flex-grow lg:flex-grow-0 py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
                            placeholder="Zoeken">
                 @endif
 

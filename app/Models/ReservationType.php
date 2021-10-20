@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ReservationType
+ *
  * @property string id
  * @property string title
  * @property string description
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property boolean has_participants
  * @property boolean has_accompanists
  * @property double price
+ * @property string organization_id
+ * @property string image
  * @package App\Models
  */
 class ReservationType extends Model
@@ -27,7 +30,7 @@ class ReservationType extends Model
 
     public static $reservationTypesEnum = [
         'reservation',
-        'extra'
+        'extra',
     ];
 
     protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists', 'price'];
@@ -44,7 +47,7 @@ class ReservationType extends Model
 
     protected $casts = [
         'has_participants' => 'boolean',
-        'has_accompanists' => 'boolean'
+        'has_accompanists' => 'boolean',
     ];
 
     public function associated()

@@ -1,4 +1,4 @@
-<div class="flex flex-col my-2">
+<div class="flex flex-col my-2 mb-4">
     <label for="{{ $id }}">{{ $label }}</label>
 
     @if (in_array($type, ['text', 'number', 'date']))
@@ -14,9 +14,14 @@
                    class="mr-2 rounded transition duration-100" {{ $value == true ? 'checked' : '' }}>
             <div class="text-gray-600">{{ $description }}</div>
         </div>
+    @elseif($type === 'file')
+        <div class="flex flex-row items-center">
+            <input accept="{{ $accept ?? '*' }}" id="{{ $id }}" name="{{ $id }}" type="file"
+                   class="rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border w-full border-gray-200">
+        </div>
     @elseif($type === 'select')
         <select id="{{ $id }}" name="{{ $id }}"
-                class="mr-2 rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">
+                class="rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">
             @if (($nullable ?? true) === true)
                 <option value="">- Geen Waarde</option>
             @endif

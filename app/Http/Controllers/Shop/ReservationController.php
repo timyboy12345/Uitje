@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\OrderLineLine;
@@ -29,7 +30,7 @@ class ReservationController extends Controller
     {
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
 
-        return view('reserve.reserve', compact(['reservationType']));
+        return view('shop.reserve.reserve', compact(['reservationType']));
     }
 
     /**
@@ -81,7 +82,7 @@ class ReservationController extends Controller
         if (Auth::guest()) {
             $rules['name'] = 'required|string|min:3';
             $rules['email'] = 'required|email|unique:users,email';
-            $rules['password'] = 'required|string';
+            $rules['password'] = 'required|string|min:8';
         } else {
             $user_id = Auth::id();
         }
@@ -152,6 +153,6 @@ class ReservationController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        return response()->view('reserve.thanks', compact(['order']));
+        return response()->view('shop.reserve.thanks', compact(['order']));
     }
 }

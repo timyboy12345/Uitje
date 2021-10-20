@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
-    public function home() {
+    /**
+     * @return Response
+     */
+    public function home(): Response
+    {
         return response()->view('dashboard.home');
     }
 }

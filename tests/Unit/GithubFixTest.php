@@ -4,10 +4,11 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class GithubFixTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic unit test example.
+     * This test is necessary because the folder is otherwise not uploaded to Git
      *
      * @return void
      */
