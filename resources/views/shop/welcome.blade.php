@@ -19,8 +19,12 @@
                     <div class="p-4">
                         <h2 class="font-bold">{{ $reservationType->title }}</h2>
 
-                        @isset($reservationType->minParticipants)
-                            <p class="text-sm opacity-80">Vanaf {{ $reservationType->minParticipants }} deelnemers</p>
+                        @isset($reservationType->min_participants)
+                            <p class="text-sm opacity-80">Vanaf {{ $reservationType->min_participants }} deelnemers</p>
+                        @endisset
+
+                        @isset($reservationType->max_participants)
+                            <p class="text-sm opacity-80">Tot {{ $reservationType->max_participants }} deelnemers</p>
                         @endisset
                     </div>
                 </a>

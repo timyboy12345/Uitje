@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\ReservationType;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,6 +18,7 @@ class ExtraReservationController extends Controller
      * @param string $order_id
      * @param string $extra_id
      * @return Response
+     * @throws BindingResolutionException
      */
     public function index(string $park, string $order_id, string $extra_id): Response
     {

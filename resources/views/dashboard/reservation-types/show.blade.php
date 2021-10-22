@@ -22,12 +22,22 @@
             @if ($reservationType->has_participants)
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     Heeft deelnemers
+                    @if ($reservationType->min_participants || $reservationType->max_participants)
+                        (@if ($reservationType->min_participants)min {{ $reservationType->min_participants }}@endif()@if ($reservationType->min_participants && $reservationType->max_participants)
+                            , @endif()@if ($reservationType->max_participants)
+                            max {{ $reservationType->max_participants }}@endif())
+                    @endif
                 </span>
             @endif
 
             @if ($reservationType->has_accompanists)
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     Heeft begeleiders
+                    @if ($reservationType->min_accompanists || $reservationType->max_accompanists)
+                        (@if ($reservationType->min_accompanists)min {{ $reservationType->min_accompanists }}@endif()@if ($reservationType->min_accompanists && $reservationType->max_accompanists)
+                            , @endif()@if ($reservationType->max_accompanists)
+                            max {{ $reservationType->max_accompanists }}@endif())
+                    @endif
                 </span>
             @endif
         </div>
@@ -39,7 +49,7 @@
                  src="{{ \Illuminate\Support\Facades\Storage::url($reservationType->image) }}">
         </div>
     @else
-        Geen afbeelding
+        <x-dashboard.card title="Afbeelding" subtitle="Er is geen afbeelding ingesteld."></x-dashboard.card>
     @endisset
 
     <div class="lg:col-span-2">

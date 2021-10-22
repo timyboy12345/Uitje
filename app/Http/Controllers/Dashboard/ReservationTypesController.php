@@ -107,8 +107,12 @@ class ReservationTypesController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'description' => 'required|string',
-            'has_participants' => 'boolean',
-            'has_accompanists' => 'boolean',
+            'has_participants' => 'boolean|required_with:min_participants',
+            'has_accompanists' => 'boolean|required_with:min_accompanists',
+            'min_participants' => 'required_with:max_participants|numeric|min:0',
+            'max_participants' => 'nullable|numeric|min:0|gte:min_participants',
+            'min_accompanists' => 'required_with:max_accompanists|numeric|min:0',
+            'max_accompanists' => 'nullable|numeric|min:0|gte:min_accompanists',
             'price' => 'nullable|numeric|min:0',
             'image' => 'nullable|file'
         ]);

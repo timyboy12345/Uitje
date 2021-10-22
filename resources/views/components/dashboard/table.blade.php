@@ -268,7 +268,22 @@
 
                     @if ($type === 'reservationTypes')
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
-                            {{ $item->title }}
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    @isset($item->image)
+                                        <img class="h-10 w-10 rounded-full object-center object-cover"
+                                             src="{{ \Illuminate\Support\Facades\Storage::url($item->image) }}"
+                                             alt="">
+                                    @else
+                                        <div class="h-10 w-10 rounded-full bg-gray-200"></div>
+                                    @endisset
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium">
+                                        {{ $item->title }}
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
                             <x-dashboard.pill>{{ $item->type }}</x-dashboard.pill>

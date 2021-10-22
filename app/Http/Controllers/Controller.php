@@ -21,7 +21,7 @@ class Controller extends BaseController
                 'title' => 'Home',
                 'icon' => 'home',
                 'route' => route('dashboard.home'),
-                'routeName' => '',
+                'routeName' => null,
             ], [
                 'title' => 'Klanten',
                 'icon' => 'users',

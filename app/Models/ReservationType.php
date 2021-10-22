@@ -33,7 +33,20 @@ class ReservationType extends Model
         'extra',
     ];
 
-    protected $fillable = ['title', 'description', 'type', 'slug', 'date_type', 'has_participants', 'has_accompanists', 'price'];
+    protected $fillable = [
+        'title',
+        'description',
+        'type',
+        'slug',
+        'date_type',
+        'has_participants',
+        'has_accompanists',
+        'price',
+        'min_accompanists',
+        'max_accompanists',
+        'min_participants',
+        'max_participants',
+    ];
 
     public function orderLines()
     {
