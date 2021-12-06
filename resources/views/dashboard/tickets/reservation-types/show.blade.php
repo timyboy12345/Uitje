@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 @section('title', 'Reserveringstype')
 @section('subtitle', $reservationType->title)
-@section('createDestination', route('dashboard.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]))
-@section('editDestination', route('dashboard.reservation-types.edit', $reservationType->id))
-@section('destroyDestination', route('dashboard.reservation-types.destroy', $reservationType->id))
+@section('createDestination', route('dashboard.tickets.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]))
+@section('editDestination', route('dashboard.tickets.reservation-types.edit', $reservationType->id))
+@section('destroyDestination', route('dashboard.tickets.reservation-types.destroy', $reservationType->id))
 
 @section('content')
     <x-dashboard.card
@@ -56,7 +56,7 @@
         <x-dashboard.table :items="$reservationType->reservationTypeLines" type="reservationTypeLines"
                            title="Vragen die bij dit reserveringstype horen"></x-dashboard.table>
 
-        <a href="{{ route('dashboard.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]) }}"
+        <a href="{{ route('dashboard.tickets.reservation-type-lines.create', ['reservation_type_id' => $reservationType->id]) }}"
            class="rounded bg-indigo-700 hover:bg-indigo-800 transition duration-100 py-2 px-4 text-white mt-2 text-sm inline-block">
             Nieuwe vraag toevoegen
         </a>

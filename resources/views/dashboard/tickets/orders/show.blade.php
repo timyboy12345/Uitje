@@ -15,6 +15,6 @@
 
     <div class="flex flex-row gap-4">
         <a class="py-2 px-4 text-white bg-indigo-700 hover:bg-indigo-800 transition duration-100 rounded"
-           href="{{ route('dashboard.orderLines.create', ['order_id' => $order->id]) }}">Nieuw onderdeel toevoegen</a>
+           href="{{ route('dashboard.tickets.order-lines.create', ['order_id' => $order->id]) }}">Nieuw onderdeel toevoegen</a>
     </div>
 @endsection

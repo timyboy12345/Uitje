@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('title', 'Onderdeel van een Reservering Aanpassen')
 @section('subtitle', $orderLine->reservationType->title)
-@section('backDestination', route('dashboard.orderLines.show', $orderLine->id))
+@section('backDestination', route('dashboard.tickets.order-lines.show', $orderLine->id))
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">

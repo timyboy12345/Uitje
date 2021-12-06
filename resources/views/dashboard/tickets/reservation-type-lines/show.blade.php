@@ -2,11 +2,11 @@
 @section('title', 'Regel van Reserveringstype')
 @section('subtitle', $reservationTypeLine->title)
 @section('backLabel', "Terug naar {$reservationTypeLine->reservationType->title}")
-@section('backDestination', route('dashboard.reservation-types.show', $reservationTypeLine->reservationType->id))
-@section('editDestination', route('dashboard.reservation-type-lines.edit', $reservationTypeLine->id))
+@section('backDestination', route('dashboard.tickets.reservation-types.show', $reservationTypeLine->reservationType->id))
+@section('editDestination', route('dashboard.tickets.reservation-type-lines.edit', $reservationTypeLine->id))
 
 @if($reservationTypeLine->reservationType->orderLines->count() === 0)
-    @section('destroyDestination', route('dashboard.reservation-type-lines.destroy', $reservationTypeLine->id))
+    @section('destroyDestination', route('dashboard.tickets.reservation-type-lines.destroy', $reservationTypeLine->id))
 @else
     @section('cannotDestroyMessage', 'Er zijn bestellingen geplaatst op dit reserveringstype, daarom kan deze niet verwijderd worden.')
 @endif

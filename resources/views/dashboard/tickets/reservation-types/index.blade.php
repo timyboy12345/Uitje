@@ -2,7 +2,7 @@
 @section('title', 'Reserveringtypes')
 @section('subtitle', 'Doorzoek hier alle reserveringstypes die in het systeem staan')
 @section('enableSearch', true)
-@section('createDestination', route('dashboard.reservation-types.create'))
+@section('createDestination', route('dashboard.tickets.reservation-types.create'))
 
 @section('content')
     <div class="lg:col-span-2">

@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
 @section('title', 'Regel van Reserveringstype aanpassen')
 @section('subtitle', $reservationTypeLine->title)
-@section('backDestination', route('dashboard.reservation-type-lines.show', $reservationTypeLine->id))
+@section('backDestination', route('dashboard.tickets.reservation-type-lines.show', $reservationTypeLine->id))
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">
         <h3 class="text-indigo-800 font-bold mb-2">Algemene Informatie</h3>
 
-        <form method="post" action="{{ route('dashboard.reservation-type-lines.update', $reservationTypeLine->id) }}">
+        <form method="post" action="{{ route('dashboard.tickets.reservation-type-lines.update', $reservationTypeLine->id) }}">
             @method('PUT')
             @csrf
 

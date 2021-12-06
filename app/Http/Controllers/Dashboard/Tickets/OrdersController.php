@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Tickets;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -22,7 +22,7 @@ class OrdersController extends Controller
     {
         $orders = Auth::user()->organization->orders()->orderByDesc('created_at')->paginate(10);
 
-        return response()->view('dashboard.orders.index', compact(['orders']));
+        return response()->view('dashboard.tickets.orders.index', compact(['orders']));
     }
 
     /**
@@ -39,7 +39,7 @@ class OrdersController extends Controller
             ];
         });
 
-        return response()->view('dashboard.orders.create', compact(['users']));
+        return response()->view('dashboard.tickets.orders.create', compact(['users']));
     }
 
     /**
@@ -60,7 +60,7 @@ class OrdersController extends Controller
         $order->confirmation_code = Str::random(10);
 
         $order->save();
-        return response()->redirectToRoute('dashboard.orders.show', $order->id);
+        return response()->redirectToRoute('dashboard.tickets.orders.show', $order->id);
     }
 
     /**
@@ -73,7 +73,7 @@ class OrdersController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        return response()->view('dashboard.orders.show', compact(['order']));
+        return response()->view('dashboard.tickets.orders.show', compact(['order']));
     }
 
     /**

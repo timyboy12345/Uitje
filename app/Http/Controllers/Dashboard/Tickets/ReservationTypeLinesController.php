@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Tickets;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservationTypeLine;
@@ -48,7 +48,7 @@ class ReservationTypeLinesController extends Controller
             ['value' => 'address', 'title' => 'Adres'],
         ];
 
-        return response()->view('dashboard.reservation-type-lines.create', compact(['reservationTypes', 'types']));
+        return response()->view('dashboard.tickets.reservation-type-lines.create', compact(['reservationTypes', 'types']));
     }
 
     /**
@@ -76,7 +76,7 @@ class ReservationTypeLinesController extends Controller
         $reservationTypeLine->is_required = $request->has('is_required');
         $reservationTypeLine->save();
 
-        return response()->redirectToRoute('dashboard.reservation-type-lines.show', [$reservationTypeLine->id]);
+        return response()->redirectToRoute('dashboard.tickets.reservation-type-lines.show', [$reservationTypeLine->id]);
     }
 
     /**
@@ -89,7 +89,7 @@ class ReservationTypeLinesController extends Controller
     {
         $reservationTypeLine = ReservationTypeLine::findOrFail($id);
 
-        return response()->view('dashboard.reservation-type-lines.show', compact(['reservationTypeLine']));
+        return response()->view('dashboard.tickets.reservation-type-lines.show', compact(['reservationTypeLine']));
     }
 
     /**
@@ -102,7 +102,7 @@ class ReservationTypeLinesController extends Controller
     {
         $reservationTypeLine = ReservationTypeLine::findOrFail($id);
 
-        return response()->view('dashboard.reservation-type-lines.edit', compact(['reservationTypeLine']));
+        return response()->view('dashboard.tickets.reservation-type-lines.edit', compact(['reservationTypeLine']));
     }
 
     /**
@@ -127,7 +127,7 @@ class ReservationTypeLinesController extends Controller
         $reservationTypeLine->is_required = $request->has('is_required');
         $reservationTypeLine->save();
 
-        return response()->redirectToRoute('dashboard.reservation-type-lines.show', [$reservationTypeLine->id]);
+        return response()->redirectToRoute('dashboard.tickets.reservation-type-lines.show', [$reservationTypeLine->id]);
     }
 
     /**

@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
         if (Auth::attempt($request->only(['email', 'password']), true)) {
             return redirect()->intended(route('dashboard.home'));
         } else {
-            return redirect()->back()->withErrors(['email' => __('auth.faile')])->withInput($request->only(['email']));
+            return redirect()->back()->withErrors(['email' => __('auth.failed')])->withInput($request->only(['email']));
         }
     }
 

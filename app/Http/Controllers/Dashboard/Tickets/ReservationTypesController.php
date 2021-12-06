@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Tickets;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservationType;
@@ -22,7 +22,7 @@ class ReservationTypesController extends Controller
     {
         $reservationTypes = Auth::user()->organization->reservationTypes()->paginate();
 
-        return response()->view('dashboard.reservation-types.index', compact(['reservationTypes']));
+        return response()->view('dashboard.tickets.reservation-types.index', compact(['reservationTypes']));
     }
 
     /**
@@ -32,7 +32,7 @@ class ReservationTypesController extends Controller
      */
     public function create(): Response
     {
-        return response()->view('dashboard.reservation-types.create');
+        return response()->view('dashboard.tickets.reservation-types.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class ReservationTypesController extends Controller
         $reservationType->organization_id = $user->organization_id;
         $reservationType->save();
 
-        return response()->redirectToRoute('dashboard.reservation-types.show', $reservationType->id);
+        return response()->redirectToRoute('dashboard.tickets.reservation-types.show', $reservationType->id);
     }
 
     /**
@@ -75,7 +75,7 @@ class ReservationTypesController extends Controller
     {
         $reservationType = ReservationType::findOrFail($id);
 
-        return response()->view('dashboard.reservation-types.show', compact(['reservationType']));
+        return response()->view('dashboard.tickets.reservation-types.show', compact(['reservationType']));
     }
 
     /**
@@ -89,7 +89,7 @@ class ReservationTypesController extends Controller
         $reservationType = ReservationType::findOrFail($id);
         $dateTypes = $this->getDateTypes();
 
-        return response()->view('dashboard.reservation-types.edit', compact(['reservationType', 'dateTypes']));
+        return response()->view('dashboard.tickets.reservation-types.edit', compact(['reservationType', 'dateTypes']));
     }
 
     /**
@@ -129,7 +129,7 @@ class ReservationTypesController extends Controller
             $reservationType->save();
         }
 
-        return response()->redirectToRoute('dashboard.reservation-types.show', [$reservationType->id]);
+        return response()->redirectToRoute('dashboard.tickets.reservation-types.show', [$reservationType->id]);
     }
 
     /**
@@ -142,7 +142,7 @@ class ReservationTypesController extends Controller
     {
         $reservationType = ReservationType::findOrFail($id);
         $reservationType->delete();
-        return response()->redirectToRoute('dashboard.reservation-types.index');
+        return response()->redirectToRoute('dashboard.tickets.reservation-types.index');
     }
 
     /**

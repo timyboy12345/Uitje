@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Onderdeel van een Reservering')
 @section('subtitle', $orderLine->reservationType->title)
-@section('editDestination', route('dashboard.orderLines.edit', $orderLine->id))
-@section('backDestination', route('dashboard.orders.show', $orderLine->order->id))
+@section('editDestination', route('dashboard.tickets.order-lines.edit', $orderLine->id))
+@section('backDestination', route('dashboard.tickets.orders.show', $orderLine->order->id))
 @section('backLabel', 'Terug naar de reservering')
 
 @section('content')

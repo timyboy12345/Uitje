@@ -54,11 +54,13 @@ module.exports = {
             },
             fontFamily: {
                 'openSans': ['"Open Sans"']
-            }
+            },
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            padding: ['hover'],
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),

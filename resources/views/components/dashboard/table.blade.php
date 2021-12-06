@@ -185,14 +185,14 @@
                             <x-dashboard.pill>{{ $item->orders->count() }}</x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.customers.show', $item->id) }}"
+                            <a href="{{ route('dashboard.crm.customers.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 {{--                            <i class="w-4 mr-2" data-feather="eye"></i>--}}
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.customers.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.crm.customers.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif
@@ -213,13 +213,13 @@
                         </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.orders.show', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.orders.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.orders.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.orders.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif
@@ -255,13 +255,13 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.orderLines.show', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.order-lines.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.orderLines.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.order-lines.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif
@@ -308,13 +308,13 @@
                             @endisset
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.reservation-types.show', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.reservation-types.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.reservation-types.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.reservation-types.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif
@@ -330,13 +330,13 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.frequently-asked-questions.show', $item->id) }}"
+                            <a href="{{ route('dashboard.content.frequently-asked-questions.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.frequently-asked-questions.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.content.frequently-asked-questions.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif
@@ -356,13 +356,13 @@
                             </x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.reservation-type-lines.show', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.reservation-type-lines.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 Bekijken
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('dashboard.reservation-type-lines.edit', $item->id) }}"
+                            <a href="{{ route('dashboard.tickets.reservation-type-lines.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif

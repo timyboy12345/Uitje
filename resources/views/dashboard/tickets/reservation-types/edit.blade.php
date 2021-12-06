@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 @section('title', 'Reserveringstype aanpassen')
 @section('subtitle', $reservationType->title)
-@section('backDestination', route('dashboard.reservation-types.show', $reservationType->id))
+@section('backDestination', route('dashboard.tickets.reservation-types.show', $reservationType->id))
 
 @section('content')
     <form method="post" enctype="multipart/form-data" class="grid gap-4 lg:col-span-2"
-          action="{{ route('dashboard.reservation-types.update', $reservationType->id) }}">
+          action="{{ route('dashboard.tickets.reservation-types.update', $reservationType->id) }}">
 
         <x-dashboard.card title="Algemene Informatie">
             @method('PUT')

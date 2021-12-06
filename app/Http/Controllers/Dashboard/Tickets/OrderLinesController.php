@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Tickets;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -45,7 +45,7 @@ class OrderLinesController extends Controller
             ];
         });
 
-        return response()->view('dashboard.orderlines.create', compact(['reservationTypes', 'orders']));
+        return response()->view('dashboard.tickets.orderlines.create', compact(['reservationTypes', 'orders']));
     }
 
     /**
@@ -69,7 +69,7 @@ class OrderLinesController extends Controller
         $orderLine->fill($request->only($orderLine->getFillable()));
         $orderLine->save();
 
-        return response()->redirectToRoute('dashboard.orderLines.show', $orderLine->id);
+        return response()->redirectToRoute('dashboard.tickets.orderLines.show', $orderLine->id);
     }
 
     /**
@@ -82,7 +82,7 @@ class OrderLinesController extends Controller
     {
         $orderLine = OrderLine::findOrFail($id);
 
-        return response()->view('dashboard.orderlines.show', compact(['orderLine']));
+        return response()->view('dashboard.tickets.orderlines.show', compact(['orderLine']));
     }
 
     /**
@@ -95,7 +95,7 @@ class OrderLinesController extends Controller
     {
         $orderLine = OrderLine::findOrFail($id);
 
-        return response()->view('dashboard.orderlines.edit', compact(['orderLine']));
+        return response()->view('dashboard.tickets.orderlines.edit', compact(['orderLine']));
     }
 
     /**
@@ -113,7 +113,7 @@ class OrderLinesController extends Controller
         $orderLine->update($values);
         $orderLine->save();
 
-        return response()->redirectToRoute('dashboard.orderLines.show', $id);
+        return response()->redirectToRoute('dashboard.tickets.orderLines.show', $id);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Crm;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -19,7 +19,7 @@ class CustomersController extends Controller
     {
         $customers = Auth::user()->organization->users()->paginate(10);
 
-        return response()->view('dashboard.customers.index', compact(['customers']));
+        return response()->view('dashboard.crm.customers.index', compact(['customers']));
     }
 
     /**
@@ -53,7 +53,7 @@ class CustomersController extends Controller
     {
         $customer = User::findOrFail($id);
 
-        return response()->view('dashboard.customers.show', compact(['customer']));
+        return response()->view('dashboard.crm.customers.show', compact(['customer']));
     }
 
     /**

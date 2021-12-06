@@ -22,26 +22,54 @@ class Controller extends BaseController
                 'icon' => 'home',
                 'route' => route('dashboard.home'),
                 'routeName' => null,
-            ], [
+            ],
+            [
                 'title' => 'Klanten',
                 'icon' => 'users',
-                'route' => route('dashboard.customers.index'),
-                'routeName' => 'customers',
-            ], [
-                'title' => 'Reserveringen',
-                'icon' => 'bookmark',
-                'route' => route('dashboard.orders.index'),
-                'routeName' => 'orders',
-            ], [
-                'title' => 'Reserveringstypes',
-                'icon' => 'book',
-                'route' => route('dashboard.reservation-types.index'),
-                'routeName' => 'reservation-types',
-            ], [
-                'title' => 'FAQ\'s',
-                'icon' => 'help-circle',
-                'route' => route('dashboard.frequently-asked-questions.index'),
-                'routeName' => 'frequently-asked-questions',
+                'route' => route('dashboard.crm.customers.index'),
+                'routeName' => 'crm',
+                'subMenus' => [
+                    [
+                        'title' => 'Klanten',
+                        'icon' => 'users',
+                        'route' => route('dashboard.crm.customers.index'),
+                        'routeName' => 'customers',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Tickets',
+                'icon' => 'dollar-sign',
+                'route' => route('dashboard.tickets.orders.index'),
+                'routeName' => 'tickets',
+                'subMenus' => [
+                    [
+                        'title' => 'Bestellingen',
+                        'icon' => 'users',
+                        'route' => route('dashboard.tickets.orders.index'),
+                        'routeName' => 'orders',
+                    ],
+                    [
+                        'title' => 'Ticket Types',
+                        'icon' => 'users',
+                        'route' => route('dashboard.tickets.reservation-types.index'),
+                        'routeName' => 'reservation-types',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Content',
+                'icon' => 'edit',
+                'route' => route('dashboard.content.frequently-asked-questions.index'),
+                'routeName' => 'content',
+                'subMenus' => [
+                    [
+                        'title' => 'Veelgestelde Vragen',
+                        'icon' => 'users',
+                        'route' => route('dashboard.content.frequently-asked-questions.index'),
+                        'routeName' => 'frequently-asked-questions',
+                    ],
+                ]
             ],
         ];
     }

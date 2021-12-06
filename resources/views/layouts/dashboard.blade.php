@@ -29,14 +29,26 @@
 
                 <div class="mt-8 flex flex-col">
                     @foreach (\App\Http\Controllers\Controller::getDashboardMenuItems() as $menuItem)
-                        <a href="{{ $menuItem['route'] }}"
-                           class="{{ isset($menuItem['routeName']) && request()->segment(2) === $menuItem['routeName'] ? 'bg-indigo-800' : '' }} rounded p-2 flex flex-row items-center opacity-70">
-                            @isset($menuItem['icon'])
-                                <i class="mr-2 w-5 h-5" data-feather="{{ $menuItem['icon'] }}"></i>
-                            @endisset
+                        <div class="{{ isset($menuItem['routeName']) && request()->segment(2) === $menuItem['routeName'] ? 'bg-indigo-800' : '' }} rounded">
+                            <a href="{{ $menuItem['route'] }}"
+                               class="p-2 flex flex-row items-center opacity-70">
+                                @isset($menuItem['icon'])
+                                    <i class="mr-2 w-5 h-5" data-feather="{{ $menuItem['icon'] }}"></i>
+                                @endisset
 
-                            {{ $menuItem['title'] }}
-                        </a>
+                                {{ $menuItem['title'] }}
+                            </a>
+
+                            @isset($menuItem['subMenus'])
+                                <div class="mb-2 ml-9 text-sm flex flex-col">
+                                    @foreach ($menuItem['subMenus'] as $subMenuItem)
+                                        <a href="{{ $subMenuItem['route'] }}"
+                                           class="{{ isset($subMenuItem['routeName']) && request()->segment(3) === $subMenuItem['routeName'] ? 'opacity-100 pl-2 hover:pl-3' : 'opacity-70 hover:pl-1' }} rounded transition-all duration-100 my-1 flex flex-row items-center"
+                                        >{{ $subMenuItem['title'] }}</a>
+                                    @endforeach
+                                </div>
+                            @endisset
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -84,7 +96,7 @@
 
                 @hasSection('cannotDestroyMessage')
                     <div title="@yield('cannotDestroyMessage')"
-                       class="flex items-center content-center bg-gray-600 hover:bg-gray-700 opacity-70 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
+                         class="flex items-center content-center bg-gray-600 hover:bg-gray-700 opacity-70 transition duration-100 text-white rounded-full py-1 px-2 text-sm">
                         <i data-feather="trash" class="w-4"></i>
                     </div>
                 @endif

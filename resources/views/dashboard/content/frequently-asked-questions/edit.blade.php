@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('title', 'Veelgestelde Vraag aanpassen')
 @section('subtitle', $faq->title)
-@section('backDestination', route('dashboard.reservation-types.show', $faq->id))
+@section('backDestination', route('dashboard.tickets.reservation-types.show', $faq->id))
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">

@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Content\FrequentlyAskedQuestionController;
+use App\Http\Controllers\Dashboard\Crm\CustomersController;
+use App\Http\Controllers\Dashboard\Tickets\OrderLinesController;
+use App\Http\Controllers\Dashboard\Tickets\ReservationTypeLinesController;
+use App\Http\Controllers\Dashboard\Tickets\ReservationTypesController;
 use App\Http\Controllers\Marketing\AuthenticationController;
 use App\Http\Controllers\Shop\AccountController;
-use App\Http\Controllers\Dashboard\CustomersController;
-use App\Http\Controllers\Dashboard\FrequentlyAskedQuestionController;
-use App\Http\Controllers\Dashboard\OrderLinesController;
-use App\Http\Controllers\Dashboard\ReservationTypeLinesController;
-use App\Http\Controllers\Dashboard\ReservationTypesController;
 use App\Http\Controllers\Shop\ExtraReservationController;
 use App\Http\Controllers\Shop\HomeController;
 use App\Http\Controllers\Shop\OrdersController;
@@ -71,11 +71,18 @@ Route::middleware(['hasOrganization', 'auth'])
     ->group(function () {
         Route::get('', [\App\Http\Controllers\Dashboard\HomeController::class, 'home'])->name('home');
 
-        Route::resource('customers', CustomersController::class);
-        Route::resource('orders', \App\Http\Controllers\Dashboard\OrdersController::class);
-        Route::resource('reservation-types', ReservationTypesController::class);
+        Route::prefix('crm')->name('crm.')->group(function () {
+            Route::resource('customers', CustomersController::class);
+        });
 
-        Route::resource('orderLines', OrderLinesController::class);
-        Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
-        Route::resource('reservation-type-lines', ReservationTypeLinesController::class);
+        Route::prefix('content')->name('content.')->group(function () {
+            Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
+        });
+
+        Route::prefix('tickets')->name('tickets.')->group(function () {
+            Route::resource('orders', \App\Http\Controllers\Dashboard\Tickets\OrdersController::class);
+            Route::resource('reservation-types', ReservationTypesController::class);
+            Route::resource('order-lines', OrderLinesController::class);
+            Route::resource('reservation-type-lines', ReservationTypeLinesController::class);
+        });
     });

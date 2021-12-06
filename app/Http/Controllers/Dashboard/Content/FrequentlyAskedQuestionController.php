@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\FrequentlyAskedQuestion;
@@ -22,7 +22,7 @@ class FrequentlyAskedQuestionController extends Controller
     {
         $faqs = Auth::user()->organization->frequentlyAskedQuestions()->paginate();
 
-        return response()->view('dashboard.frequently-asked-questions.index', compact(['faqs']));
+        return response()->view('dashboard.content.frequently-asked-questions.index', compact(['faqs']));
     }
 
     /**
@@ -33,7 +33,7 @@ class FrequentlyAskedQuestionController extends Controller
     public function create(): Response
     {
         $selectOptions = $this->getSelectOptions();
-        return response()->view('dashboard.frequently-asked-questions.create', compact('selectOptions'));
+        return response()->view('dashboard.content.frequently-asked-questions.create', compact('selectOptions'));
     }
 
     /**
@@ -58,7 +58,7 @@ class FrequentlyAskedQuestionController extends Controller
 
         $faq->save();
 
-        return response()->redirectToRoute('dashboard.frequently-asked-questions.show', $faq->id);
+        return response()->redirectToRoute('dashboard.content.frequently-asked-questions.show', $faq->id);
     }
 
     /**
@@ -71,7 +71,7 @@ class FrequentlyAskedQuestionController extends Controller
     {
         $faq = FrequentlyAskedQuestion::findOrFail($id);
 
-        return response()->view('dashboard.frequently-asked-questions.show', compact(['faq']));
+        return response()->view('dashboard.content.frequently-asked-questions.show', compact(['faq']));
     }
 
     /**
@@ -85,7 +85,7 @@ class FrequentlyAskedQuestionController extends Controller
         $faq = FrequentlyAskedQuestion::findOrFail($id);
         $selectOptions = $this->getSelectOptions();
 
-        return response()->view('dashboard.frequently-asked-questions.edit', compact(['faq', 'selectOptions']));
+        return response()->view('dashboard.content.frequently-asked-questions.edit', compact(['faq', 'selectOptions']));
     }
 
     /**
@@ -107,7 +107,7 @@ class FrequentlyAskedQuestionController extends Controller
 
         $faq->update($request->only($faq->getFillable()));
 
-        return response()->redirectToRoute('dashboard.frequently-asked-questions.show', [$faq->id]);
+        return response()->redirectToRoute('dashboard.content.frequently-asked-questions.show', [$faq->id]);
     }
 
     /**
@@ -120,7 +120,7 @@ class FrequentlyAskedQuestionController extends Controller
     {
         $faq = FrequentlyAskedQuestion::findOrFail($id);
         $faq->delete();
-        return response()->redirectToRoute('dashboard.frequently-asked-questions.index');
+        return response()->redirectToRoute('dashboard.content.frequently-asked-questions.index');
     }
 
     /**
