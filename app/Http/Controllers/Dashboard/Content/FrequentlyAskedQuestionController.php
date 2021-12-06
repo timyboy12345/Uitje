@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Content;
 use App\Http\Controllers\Controller;
 use App\Models\FrequentlyAskedQuestion;
 use App\Models\ReservationType;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,9 +21,13 @@ class FrequentlyAskedQuestionController extends Controller
      */
     public function index(): Response
     {
-        $faqs = Auth::user()->organization->frequentlyAskedQuestions()->paginate();
+        /** @var User $user */
+        $user = Auth::user();
+        $faqs = $user->organization->frequentlyAskedQuestions()->paginate();
 
-        return response()->view('dashboard.content.frequently-asked-questions.index', compact(['faqs']));
+        return response()->view('dashboard.content.frequently-asked-questions.index', [
+            'faqs' => $faqs,
+        ]);
     }
 
     /**
@@ -33,7 +38,10 @@ class FrequentlyAskedQuestionController extends Controller
     public function create(): Response
     {
         $selectOptions = $this->getSelectOptions();
-        return response()->view('dashboard.content.frequently-asked-questions.create', compact('selectOptions'));
+
+        return response()->view('dashboard.content.frequently-asked-questions.create', [
+            'selectOptions' => $selectOptions,
+        ]);
     }
 
     /**
@@ -71,7 +79,9 @@ class FrequentlyAskedQuestionController extends Controller
     {
         $faq = FrequentlyAskedQuestion::findOrFail($id);
 
-        return response()->view('dashboard.content.frequently-asked-questions.show', compact(['faq']));
+        return response()->view('dashboard.content.frequently-asked-questions.show', [
+            'faq' => $faq,
+        ]);
     }
 
     /**
@@ -85,7 +95,10 @@ class FrequentlyAskedQuestionController extends Controller
         $faq = FrequentlyAskedQuestion::findOrFail($id);
         $selectOptions = $this->getSelectOptions();
 
-        return response()->view('dashboard.content.frequently-asked-questions.edit', compact(['faq', 'selectOptions']));
+        return response()->view('dashboard.content.frequently-asked-questions.edit', [
+            'faq' => $faq,
+            'selectOptions' => $selectOptions,
+        ]);
     }
 
     /**
@@ -133,7 +146,7 @@ class FrequentlyAskedQuestionController extends Controller
                 'value' => $question->id,
                 'title' => $question->title,
             ];
-        });
+        })->toArray();
 
         $subjects[] = [
             'value' => 'general',

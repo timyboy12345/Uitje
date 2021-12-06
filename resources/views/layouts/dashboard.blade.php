@@ -29,7 +29,7 @@
 
                 <div class="mt-8 flex flex-col">
                     @foreach (\App\Http\Controllers\Controller::getDashboardMenuItems() as $menuItem)
-                        <div class="{{ isset($menuItem['routeName']) && request()->segment(2) === $menuItem['routeName'] ? 'bg-indigo-800' : '' }} rounded">
+                        <div class="{{ isset($menuItem['routeName']) && (request()->segment(2) === $menuItem['routeName'] || (request()->segment(1) === $menuItem['routeName'] && request()->segment(2) === null)) ? 'bg-indigo-800' : '' }} rounded">
                             <a href="{{ $menuItem['route'] }}"
                                class="p-2 flex flex-row items-center opacity-70">
                                 @isset($menuItem['icon'])

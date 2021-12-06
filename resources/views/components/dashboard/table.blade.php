@@ -152,6 +152,27 @@
                         <span class="sr-only">Aanpassen</span>
                     </th>
                 @endif
+
+                @if ($type === 'pois')
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Naam
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actief
+                    </th>
+{{--                    <th scope="col"--}}
+{{--                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
+{{--                        Verplicht--}}
+{{--                    </th>--}}
+                    <th scope="col" class="relative px-6 py-3">
+                        <span class="sr-only">Bekijken</span>
+                    </th>
+                    <th scope="col" class="relative px-6 py-3">
+                        <span class="sr-only">Aanpassen</span>
+                    </th>
+                @endif
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -363,6 +384,32 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.reservation-type-lines.edit', $item->id) }}"
+                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                        </td>
+                    @endif
+
+                    @if ($type === 'pois')
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
+                            {{ $item->name }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <x-dashboard.pill :textcolor="$item->is_enabled ? 'text-green-800' : 'text-red-800'" :bgcolor="$item->is_enabled ? 'bg-green-100' : 'bg-red-100'">
+                                {{ $item->is_enabled ? 'Ja' : 'Nee' }}
+                            </x-dashboard.pill>
+                        </td>
+{{--                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--}}
+{{--                            <x-dashboard.pill>--}}
+{{--                                {{ $item->is_required ? 'Ja' : 'Nee' }}--}}
+{{--                            </x-dashboard.pill>--}}
+{{--                        </td>--}}
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <a href="{{ route('dashboard.content.pois.show', $item->id) }}"
+                               class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
+                                Bekijken
+                            </a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <a href="{{ route('dashboard.content.pois.edit', $item->id) }}"
                                class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
                         </td>
                     @endif

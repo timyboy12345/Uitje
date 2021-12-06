@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Content\FrequentlyAskedQuestionController;
+use App\Http\Controllers\Dashboard\Content\PoisController;
 use App\Http\Controllers\Dashboard\Crm\CustomersController;
 use App\Http\Controllers\Dashboard\Tickets\OrderLinesController;
 use App\Http\Controllers\Dashboard\Tickets\ReservationTypeLinesController;
@@ -77,6 +78,7 @@ Route::middleware(['hasOrganization', 'auth'])
 
         Route::prefix('content')->name('content.')->group(function () {
             Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
+            Route::resource('pois', PoisController::class);
         });
 
         Route::prefix('tickets')->name('tickets.')->group(function () {

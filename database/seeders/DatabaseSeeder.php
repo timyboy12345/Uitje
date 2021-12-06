@@ -6,6 +6,7 @@ use App\Models\FrequentlyAskedQuestion;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\Organization;
+use App\Models\Poi;
 use App\Models\ReservationType;
 use App\Models\ReservationTypeLine;
 use App\Models\User;
@@ -60,9 +61,13 @@ class DatabaseSeeder extends Seeder
             FrequentlyAskedQuestion::factory(15)->create([
                 'organization_id' => $organization->id
             ]);
+
+            Poi::factory(15)->create([
+                'organization_id' => $organization->id
+            ]);
         });
 
-        if (User::count() === 5) {
+        if (User::where('email', 'help@rezer.nl')->count() === 0) {
             User::factory()->create([
                 'email' => 'help@rezer.nl',
                 'role' => 'admin',

@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
 @section('title', 'Veelgestelde Vraag aanpassen')
 @section('subtitle', $faq->title)
-@section('backDestination', route('dashboard.tickets.reservation-types.show', $faq->id))
+@section('backDestination', route('dashboard.content.frequently-asked-questions.show', $faq->id))
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">
         <h3 class="text-indigo-800 font-bold mb-2">Algemene Informatie</h3>
 
-        <form method="post" action="{{ route('dashboard.frequently-asked-questions.update', $faq->id) }}">
+        <form method="post" action="{{ route('dashboard.content.frequently-asked-questions.update', $faq->id) }}">
             @method('PUT')
             @csrf
 

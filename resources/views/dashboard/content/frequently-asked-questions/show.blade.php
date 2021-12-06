@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Veelgestelde Vraag')
 @section('subtitle', $faq->title)
-@section('editDestination', route('dashboard.tickets.frequently-asked-questions.edit', $faq->id))
-@section('destroyDestination', route('dashboard.tickets.frequently-asked-questions.destroy', $faq->id))
+@section('editDestination', route('dashboard.content.frequently-asked-questions.edit', $faq->id))
+@section('destroyDestination', route('dashboard.content.frequently-asked-questions.destroy', $faq->id))
 
 @section('content')
     <x-dashboard.card

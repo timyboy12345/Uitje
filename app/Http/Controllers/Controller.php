@@ -21,7 +21,7 @@ class Controller extends BaseController
                 'title' => 'Home',
                 'icon' => 'home',
                 'route' => route('dashboard.home'),
-                'routeName' => null,
+                'routeName' => 'dashboard',
             ],
             [
                 'title' => 'Klanten',
@@ -68,6 +68,12 @@ class Controller extends BaseController
                         'icon' => 'users',
                         'route' => route('dashboard.content.frequently-asked-questions.index'),
                         'routeName' => 'frequently-asked-questions',
+                    ],
+                    [
+                        'title' => 'Pois',
+                        'icon' => 'arrow-down-right',
+                        'route' => route('dashboard.content.pois.index'),
+                        'routeName' => 'pois',
                     ],
                 ]
             ],
