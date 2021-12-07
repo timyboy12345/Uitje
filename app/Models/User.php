@@ -22,6 +22,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string updated_at
  * @property string hashedEmail
  * @property string organization_id
+ * @property Organization organization
+ * @property mixed orders
  * @package App\Models
  */
 class User extends Authenticatable

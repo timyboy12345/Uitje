@@ -114,7 +114,10 @@
         <div class="mx-4 mb-4">
             @hasSection('backDestination')
                 <div class="mb-2">
-                    <a href="@yield('backDestination')" class="text-gray-600 text-sm">< @yield('backLabel', 'Terug')</a>
+                    <a href="@yield('backDestination')" class="text-gray-600 text-sm flex flex-row items-center">
+                        <span data-feather="arrow-left" class="h-4"></span>
+                        @yield('backLabel', 'Terug')
+                    </a>
                 </div>
             @endif
 

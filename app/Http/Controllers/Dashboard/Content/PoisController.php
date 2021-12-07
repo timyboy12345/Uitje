@@ -113,10 +113,12 @@ class PoisController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Poi $poi
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Poi $poi): Response
+    public function destroy(Poi $poi): RedirectResponse
     {
-        //
+        $poi->delete();
+
+        return response()->redirectToRoute('dashboard.content.pois.index');
     }
 }

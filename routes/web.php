@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Content\FrequentlyAskedQuestionController;
+use App\Http\Controllers\Dashboard\Content\MapsController;
+use App\Http\Controllers\Dashboard\Content\PoiImagesController;
 use App\Http\Controllers\Dashboard\Content\PoisController;
 use App\Http\Controllers\Dashboard\Crm\CustomersController;
 use App\Http\Controllers\Dashboard\Tickets\OrderLinesController;
@@ -79,6 +81,12 @@ Route::middleware(['hasOrganization', 'auth'])
         Route::prefix('content')->name('content.')->group(function () {
             Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
             Route::resource('pois', PoisController::class);
+
+            Route::prefix('pois/{poi}')->name('pois.')->group(function () {
+                Route::resource('images', PoiImagesController::class)->only(['index', 'create', 'store']);
+            });
+
+            Route::resource('maps', MapsController::class);
         });
 
         Route::prefix('tickets')->name('tickets.')->group(function () {

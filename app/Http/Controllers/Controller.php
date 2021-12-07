@@ -75,6 +75,12 @@ class Controller extends BaseController
                         'route' => route('dashboard.content.pois.index'),
                         'routeName' => 'pois',
                     ],
+                    [
+                        'title' => 'Kaarten',
+                        'icon' => 'map',
+                        'route' => route('dashboard.content.maps.index'),
+                        'routeName' => 'maps',
+                    ],
                 ]
             ],
         ];

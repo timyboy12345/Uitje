@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Poi
@@ -21,9 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean is_enabled
  * @package App\Models
  */
-class Poi extends Model
+class Poi extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     public $incrementing = false;
 
