@@ -13,7 +13,7 @@
 
 @section('content')
     <x-dashboard.card
-        title="Algemene informatie"
+        :title="__('general.terms.general-information')"
         subtitle="Een deel van deze informatie verschijnt ook op de reserveringspagina"
     >
         <h5 class="text-indigo-800">Beschrijving</h5>

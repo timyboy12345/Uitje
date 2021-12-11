@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('title', 'Kaarten')
-@section('subtitle', 'Beheer hier alle kaarten')
+@section('title', trans_choice('general.terms.maps', 1))
+@section('subtitle', __('dashboard/content/maps.index.subtitle'))
 @section('enableSearch', true)
 @section('createDestination', route('dashboard.content.maps.create'))
 

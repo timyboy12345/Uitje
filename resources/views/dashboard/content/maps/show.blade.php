@@ -8,7 +8,7 @@
 
 @section('content')
     <x-dashboard.card
-        title="Algemene Informatie"
+        :title="__('general.terms.general-information')"
     >
         <h3 class="text-indigo-800">Titel</h3>
         <div class="text-gray-600 text-sm">

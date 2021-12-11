@@ -7,7 +7,7 @@
     <form method="post" enctype="multipart/form-data" class="grid gap-4 lg:col-span-2"
           action="{{ route('dashboard.tickets.reservation-types.update', $reservationType->id) }}">
 
-        <x-dashboard.card title="Algemene Informatie">
+        <x-dashboard.card :title="__('general.terms.general-information')">
             @method('PUT')
             @csrf
 

@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">
-        <h3 class="text-indigo-800 font-bold mb-2">Algemene Informatie</h3>
+        <h3 class="text-indigo-800 font-bold mb-2">{{ __('general.terms.general-information') }}</h3>
 
         <ul class="list-disc ml-8">
             @if ($orderLine->reservationType->has_participants)

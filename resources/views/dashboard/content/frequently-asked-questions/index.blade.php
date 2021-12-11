@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('title', 'Veelgestelde Vragen')
-@section('subtitle', 'Beheer hier alle veelgestelde vragen')
+@section('title', trans_choice('general.terms.frequently-asked-questions', 2))
+@section('subtitle', __('dashboard/content/frequently-asked-questions.index.title'))
 @section('enableSearch', true)
 @section('createDestination', route('dashboard.content.frequently-asked-questions.create'))
 

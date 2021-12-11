@@ -10,7 +10,7 @@
         </div>
 
         <div class="bg-white rounded shadow-sm p-4">
-            <h1 class="text-secondary font-bold text-lg">Algemene informatie</h1>
+            <h1 class="text-secondary font-bold text-lg">{{ __('general.terms.general-information') }}</h1>
             <h2 class="text-sm text-gray-600  mb-2">Informatie over deze reservering</h2>
 
             <ul class="list-disc ml-8">

@@ -7,6 +7,9 @@ use App\Models\Poi;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
 
 class PoiImagesController extends Controller
 {
@@ -42,6 +45,8 @@ class PoiImagesController extends Controller
      * @param Poi $poi
      * @param Request $request
      * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function store(Poi $poi, Request $request): RedirectResponse
     {
@@ -58,10 +63,14 @@ class PoiImagesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Poi $poi
-     * @return Response
+     * @param string $mediaId
+     * @return RedirectResponse
+     * @throws MediaCannotBeDeleted
      */
-    public function destroy(Poi $poi)
+    public function destroy(Poi $poi, string $mediaId): RedirectResponse
     {
-        //
+        $poi->deleteMedia($mediaId);
+
+        return response()->redirectToRoute('dashboard.content.pois.images.index', $poi->id);
     }
 }

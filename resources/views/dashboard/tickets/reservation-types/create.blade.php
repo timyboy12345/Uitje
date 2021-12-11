@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white shadow-sm lg:col-span-2 rounded p-4">
-        <h3 class="text-indigo-800 font-bold mb-2">Algemene Informatie</h3>
+        <h3 class="text-indigo-800 font-bold mb-2">{{ __('general.terms.general-information') }}</h3>
 
         <form method="post" action="{{ route('dashboard.tickets.reservation-types.store') }}">
             @csrf

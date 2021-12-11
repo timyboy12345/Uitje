@@ -1,5 +1,5 @@
 <div class="flex flex-col my-2 mb-4">
-    <label for="{{ $id }}">{{ $label }}</label>
+    <label for="{{ $id }}">{{ $label ?? __("general.forms.${id}") }}</label>
 
     @if (in_array($type, ['text', 'number', 'date']))
         <input name="{{ $id }}" id="{{ $id }}" type="{{ $type }}" step="any"
@@ -23,7 +23,7 @@
         <select id="{{ $id }}" name="{{ $id }}"
                 class="rounded transition duration-100 py-1 px-2 focus:ring-indigo-800 border-gray-200">
             @if (($nullable ?? true) === true)
-                <option value="">- Geen Waarde</option>
+                <option value="">- {{ __('general.forms.no-value') }}</option>
             @endif
 
             @foreach ($options as $option)

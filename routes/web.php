@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\Content\FrequentlyAskedQuestionController;
 use App\Http\Controllers\Dashboard\Content\MapsController;
 use App\Http\Controllers\Dashboard\Content\PoiImagesController;
 use App\Http\Controllers\Dashboard\Content\PoisController;
+use App\Http\Controllers\Dashboard\Content\ShopController;
 use App\Http\Controllers\Dashboard\Crm\CustomersController;
 use App\Http\Controllers\Dashboard\Tickets\OrderLinesController;
 use App\Http\Controllers\Dashboard\Tickets\ReservationTypeLinesController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Shop\HomeController;
 use App\Http\Controllers\Shop\OrdersController;
 use App\Http\Controllers\Shop\ReservationController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,31 +70,39 @@ Route::middleware('guest')->group(function () {
 
 Route::post('logout', [AuthenticationController::class, 'logout'])->name('logoutBasic');
 
-Route::middleware(['hasOrganization', 'auth'])
-    ->prefix('dashboard')
-    ->name('dashboard.')
-    ->group(function () {
-        Route::get('', [\App\Http\Controllers\Dashboard\HomeController::class, 'home'])->name('home');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+], function () {
+    Route::middleware(['hasOrganization', 'auth'])
+        ->prefix('dashboard')
+        ->name('dashboard.')
+        ->group(function () {
+            Route::get('', [\App\Http\Controllers\Dashboard\HomeController::class, 'home'])->name('home');
 
-        Route::prefix('crm')->name('crm.')->group(function () {
-            Route::resource('customers', CustomersController::class);
-        });
-
-        Route::prefix('content')->name('content.')->group(function () {
-            Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
-            Route::resource('pois', PoisController::class);
-
-            Route::prefix('pois/{poi}')->name('pois.')->group(function () {
-                Route::resource('images', PoiImagesController::class)->only(['index', 'create', 'store']);
+            Route::prefix('crm')->name('crm.')->group(function () {
+                Route::resource('customers', CustomersController::class);
             });
 
-            Route::resource('maps', MapsController::class);
-        });
+            Route::prefix('content')->name('content.')->group(function () {
+                Route::resource('frequently-asked-questions', FrequentlyAskedQuestionController::class);
+                Route::resource('pois', PoisController::class);
 
-        Route::prefix('tickets')->name('tickets.')->group(function () {
-            Route::resource('orders', \App\Http\Controllers\Dashboard\Tickets\OrdersController::class);
-            Route::resource('reservation-types', ReservationTypesController::class);
-            Route::resource('order-lines', OrderLinesController::class);
-            Route::resource('reservation-type-lines', ReservationTypeLinesController::class);
+                Route::prefix('pois/{poi}')->name('pois.')->group(function () {
+                    Route::resource('images', PoiImagesController::class)->only(['index', 'create', 'store', 'destroy']);
+                });
+
+                Route::resource('maps', MapsController::class);
+                Route::get('shop', [ShopController::class, 'index'])->name('shop.index');
+                Route::get('shop/edit', [ShopController::class, 'edit'])->name('shop.edit');
+                Route::put('shop/edit', [ShopController::class, 'update'])->name('shop.update');
+            });
+
+            Route::prefix('tickets')->name('tickets.')->group(function () {
+                Route::resource('orders', \App\Http\Controllers\Dashboard\Tickets\OrdersController::class);
+                Route::resource('reservation-types', ReservationTypesController::class);
+                Route::resource('order-lines', OrderLinesController::class);
+                Route::resource('reservation-type-lines', ReservationTypeLinesController::class);
+            });
         });
-    });
+});

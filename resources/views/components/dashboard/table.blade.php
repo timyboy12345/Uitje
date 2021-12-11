@@ -10,125 +10,125 @@
                 @if ($type === 'customers')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Naam
+                        {{ __('general.forms.name') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Email
+                        {{ __('general.forms.email') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Lid Sinds
+                        {{ __('general.terms.member-since') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Rol
+                        {{ __('general.forms.role') }}
                     </th>
                     <th scope="col"
                         class="whitespace-nowrap px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        # Bestellingen
+                        {{ __('general.terms.amount-of-orders') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'orders')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Naam
+                        {{ __('general.forms.name') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Datum
+                        {{ __('general.forms.date') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Aantal items
+                        {{ __('general.terms.amount-of-items') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'orderLines')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Reserveringstype
+                        {{ __('general.forms.reservation-type') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Datum
+                        {{ __('general.forms.date') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
+                        {{ __('general.terms.type') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Deelnemers
+                        {{ __('general.terms.participants') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Begeleiders
+                        {{ __('general.terms.accompanists') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'reservationTypes')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Naam
+                        {{ __('general.forms.name') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
+                        {{ __('general.terms.type') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Deelnemers
+                        {{ __('general.terms.participants') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Begeleiders
+                        {{ __('general.terms.accompanists') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Prijs
+                        {{ __('general.terms.price') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'faqs')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Vraag
+                        {{ __('general.forms.question') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
+                        {{ __('general.forms.role') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
@@ -143,47 +143,50 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Verplicht
+                        {{ __('general.forms.is-manditory') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'pois')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Naam
+                        {{ __('general.forms.name') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actief
+                        {{ __('general.forms.is-active') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.images') }}</span>
+                    </th>
+                    <th scope="col" class="relative px-6 py-3">
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
 
                 @if ($type === 'maps')
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Naam
+                        {{ __('general.forms.name') }}
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actief
+                        {{ __('general.forms.is-active') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Bekijken</span>
+                        <span class="sr-only">{{ __('general.terms.view') }}</span>
                     </th>
                     <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Aanpassen</span>
+                        <span class="sr-only">{{ __('general.terms.edit') }}</span>
                     </th>
                 @endif
             </tr>
@@ -222,12 +225,12 @@
                             <a href="{{ route('dashboard.crm.customers.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
                                 {{--                            <i class="w-4 mr-2" data-feather="eye"></i>--}}
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.crm.customers.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -243,18 +246,18 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            {{ trans_choice(':count onderdeel|:count onderdelen', $item->orderLines->count(), [$item->orderLines->count()]) }}
+                            {{ trans_choice('general.terms.parts', $item->orderLines->count()) }}
                         </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.orders.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.orders.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -291,12 +294,12 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.order-lines.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.order-lines.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -325,13 +328,13 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span
                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $item->has_participants ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $item->has_participants ? 'Ja' : 'Nee' }}
+                                    {{ $item->has_participants ? __('general.terms.yes') : __('general.terms.no') }}
                                 </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span
                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $item->has_accompanists ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $item->has_accompanists ? 'Ja' : 'Nee' }}
+                                    {{ $item->has_accompanists ? __('general.terms.yes') : __('general.terms.no') }}
                                 </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-800">
@@ -344,12 +347,12 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.reservation-types.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.reservation-types.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -366,12 +369,12 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.frequently-asked-questions.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.frequently-asked-questions.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -386,18 +389,18 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <x-dashboard.pill>
-                                {{ $item->is_required ? 'Ja' : 'Nee' }}
+                                {{ $item->is_required ? __('general.terms.yes') : __('general.terms.no') }}
                             </x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.reservation-type-lines.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.tickets.reservation-type-lines.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -423,24 +426,24 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <x-dashboard.pill :textcolor="$item->is_enabled ? 'text-green-800' : 'text-red-800'"
                                               :bgcolor="$item->is_enabled ? 'bg-green-100' : 'bg-red-100'">
-                                {{ $item->is_enabled ? 'Ja' : 'Nee' }}
+                                {{ $item->is_enabled ? __('general.terms.yes') : __('general.terms.no') }}
                             </x-dashboard.pill>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.pois.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.pois.images.index', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Afbeeldingen Bekijken
+                                {{ __('general.terms.view-images') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.pois.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
 
@@ -462,12 +465,12 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.maps.show', $item->id) }}"
                                class="flex flex-row items-center text-indigo-700 hover:text-indigo-900">
-                                Bekijken
+                                {{ __('general.terms.view') }}
                             </a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('dashboard.content.maps.edit', $item->id) }}"
-                               class="text-indigo-700 hover:text-indigo-900">Aanpassen</a>
+                               class="text-indigo-700 hover:text-indigo-900">{{ __('general.terms.edit') }}</a>
                         </td>
                     @endif
                 </tr>

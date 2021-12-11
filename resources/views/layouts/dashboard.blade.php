@@ -23,13 +23,26 @@
     <nav class="w-full sm:fixed sm:h-screen sm:w-1/3 md:w-1/4 xl:w-1/5 bg-indigo-700 text-white p-4 shadow">
         <div class="lg:max-w-5xl lg:mx-auto">
             <div class="flex flex-col">
-                <a href="/" class="font-bold text-white text-xl">
-                    Uitje
-                </a>
+                <div class="flex flew-row justify-between">
+                    <a href="/" class="font-bold text-white text-xl">
+                        Uitje
+                    </a>
+
+                    <div class="flex flex-row gap-x-2">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $locale)
+                            <a href="{{ LaravelLocalization::getLocalizedURL($locale['key']) }}" class="w-6 h-6 rounded-full bg-white overflow-hidden">
+                                <img alt="Switch to {{ $locale['name'] }}" title="Switch to {{ $locale['name'] }}"
+                                     class="w-full h-full object-cover"
+                                     src="https://flagcdn.com/{{ $locale['flag'] }}.svg">
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
 
                 <div class="mt-8 flex flex-col">
                     @foreach (\App\Http\Controllers\Controller::getDashboardMenuItems() as $menuItem)
-                        <div class="{{ isset($menuItem['routeName']) && (request()->segment(2) === $menuItem['routeName'] || (request()->segment(1) === $menuItem['routeName'] && request()->segment(2) === null)) ? 'bg-indigo-800' : '' }} rounded">
+                        <div
+                            class="{{ isset($menuItem['routeName']) && (request()->segment(3) === $menuItem['routeName'] || (request()->segment(2) === $menuItem['routeName'] && request()->segment(3) === null)) ? 'bg-indigo-800' : '' }} rounded">
                             <a href="{{ $menuItem['route'] }}"
                                class="p-2 flex flex-row items-center opacity-70">
                                 @isset($menuItem['icon'])
@@ -43,7 +56,7 @@
                                 <div class="mb-2 ml-9 text-sm flex flex-col">
                                     @foreach ($menuItem['subMenus'] as $subMenuItem)
                                         <a href="{{ $subMenuItem['route'] }}"
-                                           class="{{ isset($subMenuItem['routeName']) && request()->segment(3) === $subMenuItem['routeName'] ? 'opacity-100 pl-2 hover:pl-3' : 'opacity-70 hover:pl-1' }} rounded transition-all duration-100 my-1 flex flex-row items-center"
+                                           class="{{ isset($subMenuItem['routeName']) && request()->segment(4) === $subMenuItem['routeName'] ? 'opacity-100 pl-2 hover:pl-3' : 'opacity-70 hover:pl-1' }} rounded transition-all duration-100 my-1 flex flex-row items-center"
                                         >{{ $subMenuItem['title'] }}</a>
                                     @endforeach
                                 </div>
@@ -70,9 +83,12 @@
 
             <div class="flex mt-2 lg:mt-0 flex-row items-center gap-x-2">
                 @hasSection('enableSearch')
-                    <input type="text"
-                           class="flex-grow lg:flex-grow-0 py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
-                           placeholder="Zoeken">
+                    <form method="get">
+                        <input type="text" value="{{ \Illuminate\Support\Facades\Request::input('search') }}"
+                               name="search" id="search"
+                               class="flex-grow lg:flex-grow-0 py-1.5 px-3 border-0 rounded shadow placeholder-gray-400 focus:ring-indigo-800 focus:ring-2 transition duration-100"
+                               placeholder="{{ __('general.terms.search') }}">
+                    </form>
                 @endif
 
                 @hasSection('createDestination')
@@ -116,7 +132,7 @@
                 <div class="mb-2">
                     <a href="@yield('backDestination')" class="text-gray-600 text-sm flex flex-row items-center">
                         <span data-feather="arrow-left" class="h-4"></span>
-                        @yield('backLabel', 'Terug')
+                        @yield('backLabel', __('general.terms.back'))
                     </a>
                 </div>
             @endif

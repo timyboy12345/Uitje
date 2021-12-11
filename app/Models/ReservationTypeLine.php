@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class ReservationTypeLine
@@ -19,9 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ReservationTypeLine extends Model
 {
-    public $incrementing = false;
+    use HasFactory, HasTranslations;
 
-    use HasFactory;
+    public $incrementing = false;
 
     protected $fillable = [
         'label',
@@ -35,6 +36,12 @@ class ReservationTypeLine extends Model
         'number',
         'text',
         'address',
+    ];
+
+    public $translatable = [
+        'label',
+        'description',
+        'placeholder',
     ];
 
     public function reservationType()

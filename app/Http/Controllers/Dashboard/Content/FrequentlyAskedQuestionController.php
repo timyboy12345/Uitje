@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard\Content;
 use App\Http\Controllers\Controller;
 use App\Models\FrequentlyAskedQuestion;
 use App\Models\ReservationType;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,13 +16,14 @@ class FrequentlyAskedQuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        /** @var User $user */
-        $user = Auth::user();
-        $faqs = $user->organization->frequentlyAskedQuestions()->paginate();
+        $query = FrequentlyAskedQuestion::query();
+        $query->where('title', 'like', "%{$request->get('search')}%");
+        $faqs = $query->paginate();
 
         return response()->view('dashboard.content.frequently-asked-questions.index', [
             'faqs' => $faqs,
@@ -72,31 +72,28 @@ class FrequentlyAskedQuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $id
+     * @param FrequentlyAskedQuestion $frequentlyAskedQuestion
      * @return Response
      */
-    public function show(string $id): Response
+    public function show(FrequentlyAskedQuestion $frequentlyAskedQuestion): Response
     {
-        $faq = FrequentlyAskedQuestion::findOrFail($id);
-
         return response()->view('dashboard.content.frequently-asked-questions.show', [
-            'faq' => $faq,
+            'faq' => $frequentlyAskedQuestion,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param string $id
+     * @param FrequentlyAskedQuestion $frequentlyAskedQuestion
      * @return Response
      */
-    public function edit(string $id): Response
+    public function edit(FrequentlyAskedQuestion $frequentlyAskedQuestion): Response
     {
-        $faq = FrequentlyAskedQuestion::findOrFail($id);
         $selectOptions = $this->getSelectOptions();
 
         return response()->view('dashboard.content.frequently-asked-questions.edit', [
-            'faq' => $faq,
+            'faq' => $frequentlyAskedQuestion,
             'selectOptions' => $selectOptions,
         ]);
     }
@@ -105,34 +102,34 @@ class FrequentlyAskedQuestionController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param string $id
+     * @param FrequentlyAskedQuestion $frequentlyAskedQuestion
      * @return RedirectResponse
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, FrequentlyAskedQuestion $frequentlyAskedQuestion): RedirectResponse
     {
-        $faq = FrequentlyAskedQuestion::findOrFail($id);
-
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'subject' => 'nullable|string',
         ]);
 
-        $faq->update($request->only($faq->getFillable()));
+        $frequentlyAskedQuestion->update($request->only($frequentlyAskedQuestion->getFillable()));
 
-        return response()->redirectToRoute('dashboard.content.frequently-asked-questions.show', [$faq->id]);
+        return response()
+            ->redirectToRoute('dashboard.content.frequently-asked-questions.show', [
+                $frequentlyAskedQuestion->id,
+            ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $id
+     * @param FrequentlyAskedQuestion $frequentlyAskedQuestion
      * @return RedirectResponse
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(FrequentlyAskedQuestion $frequentlyAskedQuestion): RedirectResponse
     {
-        $faq = FrequentlyAskedQuestion::findOrFail($id);
-        $faq->delete();
+        $frequentlyAskedQuestion->delete();
         return response()->redirectToRoute('dashboard.content.frequently-asked-questions.index');
     }
 

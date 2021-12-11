@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class ReservationType
@@ -24,9 +25,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ReservationType extends Model
 {
-    public $incrementing = false;
+    use HasFactory, SoftDeletes, HasTranslations;
 
-    use HasFactory, SoftDeletes;
+    public $incrementing = false;
 
     public static $reservationTypesEnum = [
         'reservation',
@@ -46,6 +47,12 @@ class ReservationType extends Model
         'max_accompanists',
         'min_participants',
         'max_participants',
+    ];
+
+    public $translatable = [
+        'title',
+        'description',
+        'slug',
     ];
 
     public function orderLines()

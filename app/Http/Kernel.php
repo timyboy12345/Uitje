@@ -65,6 +65,13 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'organizationExists' => \App\Http\Middleware\OrganizationExists::class,
         'hasOrganization' => \App\Http\Middleware\HasOrganization::class,
-        'checkRole' => \App\Http\Middleware\CheckRole::class
+        'checkRole' => \App\Http\Middleware\CheckRole::class,
+
+        // Localization Middleware (Should be last)
+        'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+        'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
     ];
 }

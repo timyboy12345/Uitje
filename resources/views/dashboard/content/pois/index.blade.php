@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('title', 'Points of Interest')
-@section('subtitle', 'Beheer hier alle pois')
+@section('title', trans_choice('general.terms.pois', 2))
+@section('subtitle', __('dashboard/content/pois.index.subtitle'))
 @section('enableSearch', true)
 @section('createDestination', route('dashboard.content.pois.create'))
 

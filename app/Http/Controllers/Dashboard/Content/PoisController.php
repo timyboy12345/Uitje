@@ -15,11 +15,14 @@ class PoisController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $pois = Poi::paginate();
+        $query = Poi::query();
+        $query->where('name', 'like', "%{$request->get('search')}%");
+        $pois = $query->paginate();
 
         return response()->view('dashboard.content.pois.index', ['pois' => $pois]);
     }

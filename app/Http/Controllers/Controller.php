@@ -18,19 +18,19 @@ class Controller extends BaseController
     {
         return [
             [
-                'title' => 'Home',
+                'title' => trans_choice('general.terms.home', 1),
                 'icon' => 'home',
                 'route' => route('dashboard.home'),
                 'routeName' => 'dashboard',
             ],
             [
-                'title' => 'Klanten',
+                'title' => trans_choice('general.terms.crm', 1),
                 'icon' => 'users',
                 'route' => route('dashboard.crm.customers.index'),
                 'routeName' => 'crm',
                 'subMenus' => [
                     [
-                        'title' => 'Klanten',
+                        'title' => trans_choice('general.terms.customers', 2),
                         'icon' => 'users',
                         'route' => route('dashboard.crm.customers.index'),
                         'routeName' => 'customers',
@@ -38,19 +38,19 @@ class Controller extends BaseController
                 ]
             ],
             [
-                'title' => 'Tickets',
+                'title' => trans_choice('general.terms.tickets', 2),
                 'icon' => 'dollar-sign',
                 'route' => route('dashboard.tickets.orders.index'),
                 'routeName' => 'tickets',
                 'subMenus' => [
                     [
-                        'title' => 'Bestellingen',
+                        'title' => trans_choice('general.terms.orders', 2),
                         'icon' => 'users',
                         'route' => route('dashboard.tickets.orders.index'),
                         'routeName' => 'orders',
                     ],
                     [
-                        'title' => 'Ticket Types',
+                        'title' => trans_choice('general.terms.ticket-types', 2),
                         'icon' => 'users',
                         'route' => route('dashboard.tickets.reservation-types.index'),
                         'routeName' => 'reservation-types',
@@ -58,28 +58,34 @@ class Controller extends BaseController
                 ]
             ],
             [
-                'title' => 'Content',
+                'title' => trans_choice('general.terms.content', 2),
                 'icon' => 'edit',
                 'route' => route('dashboard.content.frequently-asked-questions.index'),
                 'routeName' => 'content',
                 'subMenus' => [
                     [
-                        'title' => 'Veelgestelde Vragen',
+                        'title' => trans_choice('general.terms.frequently-asked-questions', 2),
                         'icon' => 'users',
                         'route' => route('dashboard.content.frequently-asked-questions.index'),
                         'routeName' => 'frequently-asked-questions',
                     ],
                     [
-                        'title' => 'Pois',
+                        'title' => trans_choice('general.terms.pois', 2),
                         'icon' => 'arrow-down-right',
                         'route' => route('dashboard.content.pois.index'),
                         'routeName' => 'pois',
                     ],
                     [
-                        'title' => 'Kaarten',
+                        'title' => trans_choice('general.terms.maps', 2),
                         'icon' => 'map',
                         'route' => route('dashboard.content.maps.index'),
                         'routeName' => 'maps',
+                    ],
+                    [
+                        'title' => __('general.terms.shop'),
+                        'icon' => 'cart',
+                        'route' => route('dashboard.content.shop.index'),
+                        'routeName' => 'shop',
                     ],
                 ]
             ],
