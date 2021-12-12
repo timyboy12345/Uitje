@@ -18,7 +18,7 @@ class HomepageTest extends TestCase
      */
     public function test_unauthorized()
     {
-        $response = $this->get('/dashboard');
+        $response = $this->get('/nl-NL/dashboard');
 
         $response->assertStatus(302);
     }
@@ -35,7 +35,7 @@ class HomepageTest extends TestCase
             'role' => 'admin',
         ]);
 
-        $response = $this->actingAs($user)->get('/dashboard');
+        $response = $this->actingAs($user)->get('/nl-NL/dashboard');
 
         $response->assertStatus(401);
     }
@@ -56,7 +56,7 @@ class HomepageTest extends TestCase
             'organization_id' => $organization->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/dashboard');
+        $response = $this->actingAs($user)->get('/nl-NL/dashboard');
 
         $response->assertStatus(200);
     }

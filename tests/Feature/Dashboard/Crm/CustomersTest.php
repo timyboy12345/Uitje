@@ -30,7 +30,7 @@ class CustomersTest extends TestCase
             'organization_id' => $org->id,
         ]);
 
-        $response = $this->actingAs($user)->get('/dashboard/crm/customers');
+        $response = $this->actingAs($user)->get('/nl-NL/dashboard/crm/customers');
 
         $response->assertStatus(200);
     }

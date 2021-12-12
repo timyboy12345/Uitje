@@ -28,9 +28,14 @@ class ReservationController extends Controller
      */
     public function index(string $park, string $slug): View
     {
+        /** @var Organization $organization */
+        $organization = Organization::where('subdomain', $park)->firstOrFail();
         $reservationType = ReservationType::where('slug', $slug)->firstOrFail();
 
-        return view('shop.reserve.reserve', compact(['reservationType']));
+        return view('shop.reserve.reserve', [
+            'organization' => $organization,
+            'reservationType' => $reservationType,
+        ]);
     }
 
     /**

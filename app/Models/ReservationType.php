@@ -52,7 +52,6 @@ class ReservationType extends Model
     public $translatable = [
         'title',
         'description',
-        'slug',
     ];
 
     public function orderLines()
