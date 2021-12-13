@@ -50,7 +50,7 @@ jobs:
             npm run prod
             php artisan cache:clear
             php artisan config:cache
-            php artisan route:cache
+            php artisan route:trans:cache
             php artisan view:clear
             php artisan up
           host: ${{ secrets.SSH_HOST }}
