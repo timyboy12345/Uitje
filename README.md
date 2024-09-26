@@ -2,6 +2,8 @@
 
 Uitje is a reservation system for the leisure industry, currently focussed on providing an interface to reserve group trips to leisure-focused locations.
 
+DEPRECATED: New project is https://github.com/timyboy12345/Pital-2.0
+
 ## Features
 - Manage customers
 - Create custom reservation types (such as birthday parties, school trips, boy/girl scout events, meal packages)
